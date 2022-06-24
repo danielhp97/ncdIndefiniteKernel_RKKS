@@ -1,0 +1,71 @@
+# comments on changing the solver
+
+
+P = np.multiply(X, np.outer(y, y))
+np.fill_diagonal(P, P.diagonal() + 1/self.C)
+one_vec = np.ones((n,))
+q = matrix(-1*one_vec) each list is a column of the matrix
+G = matrix(-1*np.eye(n))
+h = matrix(np.zeros((n, )))
+sol = qp(P=matrix(P), q=q, G=G, h=h, options={'show_progress': False})
+beta = np.array(sol['x']).reshape(-1, )
+self.w_ = np.multiply(beta, y)
+
+
+
+qp(P=matrix(P), q=q, G=G, h=h, options={'show_progress': False})
+solve_qp(P= matrix(P), q=q, G=G, h=h) 
+
+
+qp(P=matrix(P), q=q, G=G, h=h, A=A, b=matrix(np.zeros((1,), dtype=np.float64))
+solve_qp(P= matrix(P), q=q, G=G, h=h, A=A, b=matrix(np.zeros((1,), dtype=np.float64)) 
+# with the new solver
+
+
+x = solve_qp(P= matrix(P), q=q, G=G, h=h) 
+
+# the output should be on the correct measure, so the beta parameter should not need any tranformation
+
+# if we remove the dependency for the solver, the matrix should work, so no need to change it
+
+primeiro passo: conseguir o kernel
+
+
+hyperparam optm.
+
+
+2 cenas:
+
+    - introduzir multithreading
+    - reduzir kernel de 3799 linhas para 50
+
+deixar a correr o kernel inteiro em multithreading
+confirmar pipeline com kernel mais pequeno
+profit
+
+
+
+
+
+mudar a label para categoria: negativo classe 2, positivo classe 1 ✅
+
+mudar hard coding do main/03 ✅
+
+ter a certeza que o compressImage e o kernelFile é apagado cada vez que é dado reset ✅
+
+usar compressão ncd JPEG: OU criar nova bd com as imagens todas em JPEG 
+                          OU fazer load e adicionar a um numpy array(?) 16 unsigned, (se calhar é o melhor) ✅
+    confirmar como é que é dado o input do ncd na ncd_matrix e no kernel calc, pode nao ser compativel com a classe como está agora.
+    confirmat no src/main também ✅
+
+criar passo para retirar linhas vazias do label.csv ( com ifs) ✅
+
+
+finalizar o overall calc ✅
+
+fazer um teste run com o jpeg apos todas as etapas anteriores estarem a funcionar ( sem dvc) ✅
+
+rever parametros/ rever etapas 
+POR DVC A FUNCIONAR!
+
+rerun com classes diferentes para testar se funciona

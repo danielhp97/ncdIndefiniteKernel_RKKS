@@ -1,0 +1,57 @@
+###########################################################################################
+
+new project
+
+
+need to change ncd pipelone to a kreinsvm 
+
+we got the code to fit a svm in a RKKS space.
+
+what ewe need is to change the kernel matrix to a ncd-based one.
+
+
+code for a ncd kernel matrix creator:
+
+
+def ncd_kernel(x_images, y_images, parameters=None):
+    n1 = len(x_images)
+    n2 = len(y_images)
+    k = np.zeroes((n1,n2))
+    for x in x_images:
+        for y in y_images:
+        k[x,y] = ncd(x,y)
+    return k
+# ncd_matrix
+
+y_images needs to be a array of np objects
+
+we need to feed the matrix to?
+
+
+Model = SquareHingeKernelSVM()
+
+Model.fit(ncd_matrix, x_images)
+
+after we get the fit...
+
+we need to predict the results:
+Model.predict(y_images)
+predictions = Model.predict(y_images)
+
+
+out_params = Model.get_params()
+
+Prediction = SquareHingeKernelSVM.predict(y_images)
+
+
+
+# afazeres
+
+mudar o ncd_apply para ficar 100% certo com o ncd_kernelmatrix
+
+experimentar a classe
+
+
+
+
+can only feed same n of matrix as an array to train 

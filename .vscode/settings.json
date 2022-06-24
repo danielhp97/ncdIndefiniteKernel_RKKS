@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "standalone_image.h": "c"
+    },
+    "python.analysis.extraPaths": [
+        "./src/00"
+    ]
+}

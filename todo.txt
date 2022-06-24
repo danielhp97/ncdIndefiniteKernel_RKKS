@@ -1,0 +1,68 @@
+# Set up structure
+data done
+src - preprocessing
+    - data: scripts to divide it on training and test and eval.
+    - modeling
+    - testing
+    - dagshub results publishing
+
+
+# Set up datasets
+needs to organize in train /test and eval
+setup
+dataset 1 - select two classes and mix them. Divide them in train, test and validation. (script)
+data - dataset1 - train/
+                - test/
+                - labels.txt
+preprocessing bad: need to undo symlinks in bottom directories
+# Set up DVC
+missing setting up cache in 1TB hardrive
+# Set up board
+after set up is finished
+
+
+
+##########
+
+alterar algumas merdas:
+
+
+primeiro, por iteraçoes no yaml do dvc: trocar o parametro numero de folds para uma lista.
+nuances:
+    - so se pode fazer o label, split e subset na primeira iteração
+depois, aplicar para cada consequente step.
+perguntas:
+    - será necessário por os dois parametros? (lista + max de k folds), achoq  sim.
+
+ta fodido os csv com os caminhos train test. done.
+
+
+##### kernel paper apontamentos
+cada matriz ( kernel) é a gram matrix de cada uma destas feature functions
+
+Lf = f(i) . f(i)
+
+as feeature functions sao normaliozadas:
+||f(i)||^2 = 1
+
+
+
+feature extraction methods:
+(2 variants)
+- color: transformed into histograms of 8/64 bins (how to do it)
+(2 variants) https://pypi.org/project/pyvlfeat/ # cant install
+- sift: images are processed to sift descriptiors, clustered to 256 or 512 clusters. feature vector is the histogram of the closest descriptiors
+(1 variant) http://bemlar.ism.ac.jp/zhuang/Refs/Refs/ogata1985.pdf https://github.com/whitphx/lear-gist-python
+- gist: 960 dim feature vectors with various properties like openess, roughness, naturalness
+
+then these methods are replicated only for the center of the image (retangulo com metade das dimensoes originais centrado)
+we have then the 10 kernels
+
+45 pairwise combination kernels concatenated:
+concatenam todas os pares de kernels acima descritos e formam 45 pairwise combination kernels
+
+THEN we add a p constant hyperparameter
+
+p increases: all images appear similar (increasing repulsion)
+
+p is chosen independentely and each category
