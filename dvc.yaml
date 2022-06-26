@@ -1,0 +1,74 @@
+stages:
+  #Data_Preprocessing:
+  #  cmd: python3 src/00/main.py
+  #  deps:
+  #    - data/dataset${Parameters.dataset}/
+  #  params:
+  #    - Parameters
+  #  outs:
+  #    - data/00/dataset${Parameters.dataset}/train/
+  #    - data/00/dataset${Parameters.dataset}/test/
+  #    - data/dataset${Parameters.dataset}/labels.csv
+  Preprocessing:
+    foreach: ${General.kfold_iterations}
+    do:
+      cmd: python3 src/01/main.py ${item}
+      deps:
+        - data/00/dataset${Parameters.dataset}/train/${item}/x.csv
+        - data/00/dataset${Parameters.dataset}/test/${item}/y.csv
+      params: 
+        - Parameters
+      #outs:
+      #  - data/01/dataset${Parameters.dataset}/train/${item}/img_dump/
+      #  - data/01/dataset${Parameters.dataset}/test/${item}/img_dump/
+  Kernel:
+    cmd: python3 src/02/kernel_calc.py
+    deps:
+      - src/00/ncd.py
+      - src/00/learning_algorithms.py
+      - data/dataset${Parameters.dataset}/labels.csv
+    params: 
+      - Parameters
+    #outs:
+    #  - data/dataset${Parameters.dataset}/kernel/kernelmatrix.npy
+  Train:
+    foreach: ${General.kfold_iterations}
+    do:
+      cmd: python3 src/02/main.py ${item}
+      deps:
+        - data/dataset${Parameters.dataset}/labels.csv
+        - data/01/dataset${Parameters.dataset}/train/${item}/img_dump/labels.csv
+        - data/dataset${Parameters.dataset}/kernel/kernelmatrix.npy
+      #outs:
+      #  - data/02/dataset${Parameters.dataset}/train/${item}/model_instances.pkl
+  Test:
+    foreach: ${General.kfold_iterations}
+    do:
+      cmd: python3 src/03/main.py ${item}
+      deps:
+        - data/02/dataset${Parameters.dataset}/train/${item}/model_instances.pkl
+        - data/01/dataset${Parameters.dataset}/test/${item}/img_dump/
+        - data/01/dataset${Parameters.dataset}/train/${item}/img_dump/labels.csv
+        - data/01/dataset${Parameters.dataset}/test/${item}/img_dump/labels.csv
+      #outs:
+      #  - data/03/dataset${Parameters.dataset}/${item}/results.csv  
+  Reporting:
+    foreach: ${General.kfold_iterations}
+    do:
+      cmd: python3 src/04/main.py ${item}
+      deps:
+        - data/03/dataset${Parameters.dataset}/0/results.csv
+      outs:
+        - metrics/metrics${item}.json  
+  Overall_metrics:
+    cmd: python3 src/04/overall.py
+    deps:
+      - metrics/metrics0.json
+      - metrics/metrics1.json
+      - metrics/metrics2.json
+      - metrics/metrics3.json
+      - metrics/metrics4.json
+    metrics:
+      - metrics/final_metrics.json:
+          cache: false
+    
