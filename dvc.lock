@@ -1,0 +1,367 @@
+schema: '2.0'
+stages:
+  Preprocessing@4:
+    cmd: python3 src/01/main.py 4
+    deps:
+    - path: data/00/dataset1/test/4/y.csv
+      md5: ee0cb7712322bcf96a5131b343eff4e9
+      size: 300
+    - path: data/00/dataset1/train/4/x.csv
+      md5: 6f7967356f7b5b8441852efc43b5708a
+      size: 3807
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Preprocessing@3:
+    cmd: python3 src/01/main.py 3
+    deps:
+    - path: data/00/dataset1/test/3/y.csv
+      md5: bf58486ee9babdb1469a3e6cce789059
+      size: 292
+    - path: data/00/dataset1/train/3/x.csv
+      md5: 3d1552209c6fd33e1470a10bc7c6d0b9
+      size: 3815
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Train@3:
+    cmd: python3 src/02/main.py 3
+    deps:
+    - path: data/01/dataset1/train/3/img_dump/labels.csv
+      md5: 46f4b714e35ef80672d2497b01633d76
+      size: 2870
+    - path: data/dataset1/kernel/kernelmatrix.npy
+      md5: 38ed6f3aa528e10dbc346cc72f64ed28
+      size: 137416
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+  Train@1:
+    cmd: python3 src/02/main.py 1
+    deps:
+    - path: data/01/dataset1/train/1/img_dump/labels.csv
+      md5: 20c0445747689a070c62e6a5e87aaf2c
+      size: 2870
+    - path: data/dataset1/kernel/kernelmatrix.npy
+      md5: 38ed6f3aa528e10dbc346cc72f64ed28
+      size: 137416
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+  Kernel:
+    cmd: python3 src/02/kernel_calc.py
+    deps:
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+    - path: src/00/learning_algorithms.py
+      md5: 4b207642a49d0650e4dd327d1c90a639
+      size: 4720
+    - path: src/00/ncd.py
+      md5: 717574259b6e7108dd65f097e0e4f14c
+      size: 3146
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Test@1:
+    cmd: python3 src/03/main.py 1
+    deps:
+    - path: data/01/dataset1/test/1/img_dump/
+      md5: a56c2b2d68ee00a811ace5b8dd837bb3.dir
+      size: 223106
+      nfiles: 27
+    - path: data/01/dataset1/test/1/img_dump/labels.csv
+      md5: fd5407863899deb1e8426fb8067b9005
+      size: 708
+    - path: data/01/dataset1/train/1/img_dump/labels.csv
+      md5: 20c0445747689a070c62e6a5e87aaf2c
+      size: 2870
+    - path: data/02/dataset1/train/1/model_instances.pkl
+      md5: 51b70edc03d6855266931180fa8ff3cf
+      size: 1141
+  Train@4:
+    cmd: python3 src/02/main.py 4
+    deps:
+    - path: data/01/dataset1/train/4/img_dump/labels.csv
+      md5: 7e45cf5fb34ab273d3bbbb1ce3bbb1e2
+      size: 2862
+    - path: data/dataset1/kernel/kernelmatrix.npy
+      md5: 38ed6f3aa528e10dbc346cc72f64ed28
+      size: 137416
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+  Test@2:
+    cmd: python3 src/03/main.py 2
+    deps:
+    - path: data/01/dataset1/test/2/img_dump/
+      md5: 6eb5772692b3357ef8319593eb776b29.dir
+      size: 206370
+      nfiles: 26
+    - path: data/01/dataset1/test/2/img_dump/labels.csv
+      md5: 642c1e5284893b5d5e1b32954266b925
+      size: 712
+    - path: data/01/dataset1/train/2/img_dump/labels.csv
+      md5: 88b0957f719cfae1bbafe2dc7a56656e
+      size: 2866
+    - path: data/02/dataset1/train/2/model_instances.pkl
+      md5: 51b70edc03d6855266931180fa8ff3cf
+      size: 1141
+  Test@3:
+    cmd: python3 src/03/main.py 3
+    deps:
+    - path: data/01/dataset1/test/3/img_dump/
+      md5: 739ae0ad45e51389fc9112aa482e83e3.dir
+      size: 215624
+      nfiles: 26
+    - path: data/01/dataset1/test/3/img_dump/labels.csv
+      md5: 4bcbecd8fc99a9687cd815b11339dc02
+      size: 708
+    - path: data/01/dataset1/train/3/img_dump/labels.csv
+      md5: 46f4b714e35ef80672d2497b01633d76
+      size: 2870
+    - path: data/02/dataset1/train/3/model_instances.pkl
+      md5: 51b70edc03d6855266931180fa8ff3cf
+      size: 1141
+  Reporting@4:
+    cmd: python3 src/04/main.py 4
+    deps:
+    - path: data/03/dataset1/0/results.csv
+      md5: 59ac6e91b2a3dd31e2285e2a323433c5
+      size: 1735
+    outs:
+    - path: metrics/metrics4.json
+      md5: 8d71e635b9382eed63fe9ed3dab21554
+      size: 39
+  Preprocessing@0:
+    cmd: python3 src/01/main.py 0
+    deps:
+    - path: data/00/dataset1/test/0/y.csv
+      md5: b969eeafc87fc40585a09fdaaf9bb898
+      size: 302
+    - path: data/00/dataset1/train/0/x.csv
+      md5: 66a5a0efaae2cf9fcc59357506cdb487
+      size: 3780
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Test@4:
+    cmd: python3 src/03/main.py 4
+    deps:
+    - path: data/01/dataset1/test/4/img_dump/
+      md5: 3c53d8d0cda3ae321f6afd4b4a9c0aa8.dir
+      size: 223322
+      nfiles: 25
+    - path: data/01/dataset1/test/4/img_dump/labels.csv
+      md5: 334121261ef7c55c5fb60401ce4db112
+      size: 716
+    - path: data/01/dataset1/train/4/img_dump/labels.csv
+      md5: 7e45cf5fb34ab273d3bbbb1ce3bbb1e2
+      size: 2862
+    - path: data/02/dataset1/train/4/model_instances.pkl
+      md5: 51b70edc03d6855266931180fa8ff3cf
+      size: 1141
+  Reporting@3:
+    cmd: python3 src/04/main.py 3
+    deps:
+    - path: data/03/dataset1/0/results.csv
+      md5: 59ac6e91b2a3dd31e2285e2a323433c5
+      size: 1735
+    outs:
+    - path: metrics/metrics3.json
+      md5: be3cf479dac540008b38ccaf139300b2
+      size: 39
+  Preprocessing@2:
+    cmd: python3 src/01/main.py 2
+    deps:
+    - path: data/00/dataset1/test/2/y.csv
+      md5: 8f336f47f80dbbbc7ac16da2a8b09cf1
+      size: 296
+    - path: data/00/dataset1/train/2/x.csv
+      md5: 1e66773c94a9da80921d2f57912780fa
+      size: 3811
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Preprocessing@1:
+    cmd: python3 src/01/main.py 1
+    deps:
+    - path: data/00/dataset1/test/1/y.csv
+      md5: bf58486ee9babdb1469a3e6cce789059
+      size: 292
+    - path: data/00/dataset1/train/1/x.csv
+      md5: 71622bd37f7fed61a6727b12380420d0
+      size: 3815
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compression
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: kangaroo
+          class2: pigeon
+  Train@0:
+    cmd: python3 src/02/main.py 0
+    deps:
+    - path: data/01/dataset1/train/0/img_dump/labels.csv
+      md5: a23fe00d690027b5a4fbf12429dddfba
+      size: 2844
+    - path: data/dataset1/kernel/kernelmatrix.npy
+      md5: 38ed6f3aa528e10dbc346cc72f64ed28
+      size: 137416
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+  Reporting@2:
+    cmd: python3 src/04/main.py 2
+    deps:
+    - path: data/03/dataset1/0/results.csv
+      md5: 59ac6e91b2a3dd31e2285e2a323433c5
+      size: 1735
+    outs:
+    - path: metrics/metrics2.json
+      md5: c9a857f41d3d3713ef18b4957c3ee600
+      size: 40
+  Reporting@0:
+    cmd: python3 src/04/main.py 0
+    deps:
+    - path: data/03/dataset1/0/results.csv
+      md5: 59ac6e91b2a3dd31e2285e2a323433c5
+      size: 1735
+    outs:
+    - path: metrics/metrics0.json
+      md5: 3cfa02ba1dff2dafe31d1b1e47d951ac
+      size: 54
+  Reporting@1:
+    cmd: python3 src/04/main.py 1
+    deps:
+    - path: data/03/dataset1/0/results.csv
+      md5: 59ac6e91b2a3dd31e2285e2a323433c5
+      size: 1735
+    outs:
+    - path: metrics/metrics1.json
+      md5: be3cf479dac540008b38ccaf139300b2
+      size: 39
+  Overall_metrics:
+    cmd: python3 src/04/overall.py
+    deps:
+    - path: metrics/metrics0.json
+      md5: 3cfa02ba1dff2dafe31d1b1e47d951ac
+      size: 54
+    - path: metrics/metrics1.json
+      md5: be3cf479dac540008b38ccaf139300b2
+      size: 39
+    - path: metrics/metrics2.json
+      md5: c9a857f41d3d3713ef18b4957c3ee600
+      size: 40
+    - path: metrics/metrics3.json
+      md5: be3cf479dac540008b38ccaf139300b2
+      size: 39
+    - path: metrics/metrics4.json
+      md5: 8d71e635b9382eed63fe9ed3dab21554
+      size: 39
+    outs:
+    - path: metrics/final_metrics.json
+      md5: b5eed6d276a34fdb7b0a35d1712dbc9c
+      size: 64
+  Train@2:
+    cmd: python3 src/02/main.py 2
+    deps:
+    - path: data/01/dataset1/train/2/img_dump/labels.csv
+      md5: 88b0957f719cfae1bbafe2dc7a56656e
+      size: 2866
+    - path: data/dataset1/kernel/kernelmatrix.npy
+      md5: 38ed6f3aa528e10dbc346cc72f64ed28
+      size: 137416
+    - path: data/dataset1/labels.csv
+      md5: 83c7175058d8cceb01c048c6fb773552
+      size: 661665
+  Test@0:
+    cmd: python3 src/03/main.py 0
+    deps:
+    - path: data/01/dataset1/test/0/img_dump/
+      md5: 8d858da6ff771382670c2cb2fcda4d0e.dir
+      size: 235645
+      nfiles: 28
+    - path: data/01/dataset1/test/0/img_dump/labels.csv
+      md5: d8944435818c20da7b875c52f77b8439
+      size: 734
+    - path: data/01/dataset1/train/0/img_dump/labels.csv
+      md5: a23fe00d690027b5a4fbf12429dddfba
+      size: 2844
+    - path: data/02/dataset1/train/0/model_instances.pkl
+      md5: 4ca643adc005a0aad5e5698a70ce76b0
+      size: 1133

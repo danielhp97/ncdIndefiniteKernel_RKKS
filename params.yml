@@ -1,0 +1,13 @@
+class1: kangaroo
+class2: pigeon
+dataset: 1
+feature_extration:
+  rotation_ncd: true
+kfold_nr: 5
+multiclassification: false
+ncd_baseline:
+  ncd_type: jpeg_compression
+preprocess:
+  label: true
+  split: true
+  subset: true
