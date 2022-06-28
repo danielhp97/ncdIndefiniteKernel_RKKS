@@ -22,8 +22,12 @@ def data_preparation(base_dir, split="test"):
 
 def compare_indices(generalDf, trainDf):
     index_list = []
+    pd.set_option("display.max_rows", None, "display.max_columns", None)
+    print(generalDf['truePath'])
     for row in trainDf['truePath'].iteritems():
+        print(row[1])
         indexes = generalDf.index[generalDf['truePath']==row[1]]
+        print(indexes)
         index_list.append(indexes[0])
     return(index_list)
         

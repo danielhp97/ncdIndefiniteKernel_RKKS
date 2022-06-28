@@ -29,11 +29,11 @@ stages:
     cmd: python3 src/01/main.py 3
     deps:
     - path: data/00/dataset1/test/3/y.csv
-      md5: bf58486ee9babdb1469a3e6cce789059
-      size: 292
+      md5: db9831d34f879aba7995bc24b5e78a44
+      size: 190
     - path: data/00/dataset1/train/3/x.csv
-      md5: 3d1552209c6fd33e1470a10bc7c6d0b9
-      size: 3815
+      md5: 38b712fb46b34ea5b746a225161acf61
+      size: 2625
     params:
       params.yaml:
         Parameters:
@@ -48,38 +48,38 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Train@3:
     cmd: python3 src/02/main.py 3
     deps:
     - path: data/01/dataset1/train/3/img_dump/labels.csv
-      md5: 46f4b714e35ef80672d2497b01633d76
-      size: 2870
+      md5: 8bcc87baafac920735d1a916e364304b
+      size: 1950
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 38ed6f3aa528e10dbc346cc72f64ed28
-      size: 137416
+      md5: 38ff56e43637e3a150ee71795af7a50d
+      size: 70816
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
   Train@1:
     cmd: python3 src/02/main.py 1
     deps:
     - path: data/01/dataset1/train/1/img_dump/labels.csv
-      md5: 20c0445747689a070c62e6a5e87aaf2c
-      size: 2870
+      md5: c83aa4153406973781e7e5fd14c875bf
+      size: 1950
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 38ed6f3aa528e10dbc346cc72f64ed28
-      size: 137416
+      md5: 38ff56e43637e3a150ee71795af7a50d
+      size: 70816
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
   Kernel:
     cmd: python3 src/02/kernel_calc.py
     deps:
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
     - path: src/00/learning_algorithms.py
       md5: 4b207642a49d0650e4dd327d1c90a639
       size: 4720
@@ -100,7 +100,7 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Test@1:
     cmd: python3 src/03/main.py 1
@@ -122,14 +122,14 @@ stages:
     cmd: python3 src/02/main.py 4
     deps:
     - path: data/01/dataset1/train/4/img_dump/labels.csv
-      md5: 7e45cf5fb34ab273d3bbbb1ce3bbb1e2
-      size: 2862
+      md5: a05f122d6fa351193ed23643a6cd11c1
+      size: 1976
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 38ed6f3aa528e10dbc346cc72f64ed28
-      size: 137416
+      md5: 38ff56e43637e3a150ee71795af7a50d
+      size: 70816
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
   Test@2:
     cmd: python3 src/03/main.py 2
     deps:
@@ -166,12 +166,12 @@ stages:
     cmd: python3 src/04/main.py 4
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 59ac6e91b2a3dd31e2285e2a323433c5
-      size: 1735
+      md5: f3fb21eb4b3ec33ff4314aa0d675a1a3
+      size: 1183
     outs:
     - path: metrics/metrics4.json
-      md5: 8d71e635b9382eed63fe9ed3dab21554
-      size: 39
+      md5: d4dcc7aa87e029109026120002cdbbe6
+      size: 53
   Preprocessing@0:
     cmd: python3 src/01/main.py 0
     deps:
@@ -217,8 +217,8 @@ stages:
     cmd: python3 src/04/main.py 3
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 59ac6e91b2a3dd31e2285e2a323433c5
-      size: 1735
+      md5: f3fb21eb4b3ec33ff4314aa0d675a1a3
+      size: 1183
     outs:
     - path: metrics/metrics3.json
       md5: be3cf479dac540008b38ccaf139300b2
@@ -246,17 +246,17 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Preprocessing@1:
     cmd: python3 src/01/main.py 1
     deps:
     - path: data/00/dataset1/test/1/y.csv
-      md5: bf58486ee9babdb1469a3e6cce789059
-      size: 292
+      md5: 0863f7b3e9f99ee575c6bd869f818404
+      size: 190
     - path: data/00/dataset1/train/1/x.csv
-      md5: 71622bd37f7fed61a6727b12380420d0
-      size: 3815
+      md5: 31f099c47e712ca6cc81eaaac6b8bb32
+      size: 2625
     params:
       params.yaml:
         Parameters:
@@ -271,26 +271,26 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Train@0:
     cmd: python3 src/02/main.py 0
     deps:
     - path: data/01/dataset1/train/0/img_dump/labels.csv
-      md5: a23fe00d690027b5a4fbf12429dddfba
-      size: 2844
+      md5: 74a94038d4681262f74554108abd791b
+      size: 1950
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 38ed6f3aa528e10dbc346cc72f64ed28
-      size: 137416
+      md5: 38ff56e43637e3a150ee71795af7a50d
+      size: 70816
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
   Reporting@2:
     cmd: python3 src/04/main.py 2
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 59ac6e91b2a3dd31e2285e2a323433c5
-      size: 1735
+      md5: f3fb21eb4b3ec33ff4314aa0d675a1a3
+      size: 1183
     outs:
     - path: metrics/metrics2.json
       md5: c9a857f41d3d3713ef18b4957c3ee600
@@ -299,31 +299,31 @@ stages:
     cmd: python3 src/04/main.py 0
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 59ac6e91b2a3dd31e2285e2a323433c5
-      size: 1735
+      md5: f3fb21eb4b3ec33ff4314aa0d675a1a3
+      size: 1183
     outs:
     - path: metrics/metrics0.json
-      md5: 3cfa02ba1dff2dafe31d1b1e47d951ac
-      size: 54
+      md5: 6c092b67c91ac8de1f520e385213470a
+      size: 39
   Reporting@1:
     cmd: python3 src/04/main.py 1
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 59ac6e91b2a3dd31e2285e2a323433c5
-      size: 1735
+      md5: f3fb21eb4b3ec33ff4314aa0d675a1a3
+      size: 1183
     outs:
     - path: metrics/metrics1.json
-      md5: be3cf479dac540008b38ccaf139300b2
-      size: 39
+      md5: e78eb0c34f6d166646322c588c5e99f4
+      size: 53
   Overall_metrics:
     cmd: python3 src/04/overall.py
     deps:
     - path: metrics/metrics0.json
-      md5: 3cfa02ba1dff2dafe31d1b1e47d951ac
-      size: 54
-    - path: metrics/metrics1.json
-      md5: be3cf479dac540008b38ccaf139300b2
+      md5: 6c092b67c91ac8de1f520e385213470a
       size: 39
+    - path: metrics/metrics1.json
+      md5: e78eb0c34f6d166646322c588c5e99f4
+      size: 53
     - path: metrics/metrics2.json
       md5: c9a857f41d3d3713ef18b4957c3ee600
       size: 40
@@ -331,24 +331,24 @@ stages:
       md5: be3cf479dac540008b38ccaf139300b2
       size: 39
     - path: metrics/metrics4.json
-      md5: 8d71e635b9382eed63fe9ed3dab21554
-      size: 39
+      md5: d4dcc7aa87e029109026120002cdbbe6
+      size: 53
     outs:
     - path: metrics/final_metrics.json
-      md5: b5eed6d276a34fdb7b0a35d1712dbc9c
-      size: 64
+      md5: 8ddc38992f46913a18954fe79b839bd4
+      size: 65
   Train@2:
     cmd: python3 src/02/main.py 2
     deps:
     - path: data/01/dataset1/train/2/img_dump/labels.csv
-      md5: 88b0957f719cfae1bbafe2dc7a56656e
-      size: 2866
+      md5: 425d155dc79cd3715c69c4f8aeba577a
+      size: 1950
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 38ed6f3aa528e10dbc346cc72f64ed28
-      size: 137416
+      md5: 38ff56e43637e3a150ee71795af7a50d
+      size: 70816
     - path: data/dataset1/labels.csv
-      md5: 83c7175058d8cceb01c048c6fb773552
-      size: 661665
+      md5: 76852bf51ce5f6225657cc57b20f28d0
+      size: 661599
   Test@0:
     cmd: python3 src/03/main.py 0
     deps:

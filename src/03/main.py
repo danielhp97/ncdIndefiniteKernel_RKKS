@@ -64,6 +64,8 @@ def compare_indices(generalDf, trainDf):
     index_list = []
     for row in trainDf['truePath'].iteritems():
         indexes = generalDf.index[generalDf['truePath']==row[1]]
+        print(indexes)
+        print(row)
         index_list.append(indexes[0])
     return(index_list)
         
@@ -164,12 +166,14 @@ if __name__ == "__main__":
     indices_train = get_training_indices(kernel, 'data/dataset{0}/labels.csv'.format(dataset_number), class1, class2) #dictionary of train indices
     indices_test = get_testing_indices(kernel, 'data/dataset{0}/labels.csv'.format(dataset_number), class1, class2) #dictionary of test indices 
     kernel_cut = Ncd.get_testing_matrix(kernel, indices_train, indices_test, dataset_number)
+    print(kernel_cut.shape)
     # prediction
     #import model
     with open('data/02/dataset{0}/train/{1}/model_instances.pkl'.format(str(dataset_number), i), "rb") as input_file:
         model = pickle.load(input_file)
     predictions = []
     true_labels = data['Class']
+    print(kernel_cut)
     predictions = model.predict(kernel_cut)
     # create dataframe with data original values and predictions
     final_data = data

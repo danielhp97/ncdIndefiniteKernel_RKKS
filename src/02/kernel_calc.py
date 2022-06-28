@@ -1,4 +1,5 @@
 from pyexpat import model
+from re import L
 import sys
 sys.path.insert(1, './src/00/')
 import os
@@ -116,6 +117,12 @@ if __name__ == "__main__":
     print(" finished preparing label file")
     print("started compressing dataset")
     np_images = ncd_preparation(is_filtered, ncd_type)
+    print(len(np_images))
+    counter_teste = 1
+    for i in np_images:
+        print("Imagem nr: {0} -> shape: {1}".format(counter_teste,i.shape))
+        counter_teste+=1
+
     np.save('data/dataset{0}/kernel/compressedImages'.format(dataset_number), np_images)
     print(len(np_images))
     print("Finished compressing")

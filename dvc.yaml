@@ -46,6 +46,7 @@ stages:
     do:
       cmd: python3 src/03/main.py ${item}
       deps:
+        - src/02/main.py
         - data/02/dataset${Parameters.dataset}/train/${item}/model_instances.pkl
         - data/01/dataset${Parameters.dataset}/test/${item}/img_dump/
         - data/01/dataset${Parameters.dataset}/train/${item}/img_dump/labels.csv
