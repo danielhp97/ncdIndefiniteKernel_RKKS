@@ -176,11 +176,11 @@ stages:
     cmd: python3 src/01/main.py 0
     deps:
     - path: data/00/dataset1/test/0/y.csv
-      md5: b969eeafc87fc40585a09fdaaf9bb898
-      size: 302
+      md5: 0935d6cbbd236d5718097dabe92cf59b
+      size: 190
     - path: data/00/dataset1/train/0/x.csv
-      md5: 66a5a0efaae2cf9fcc59357506cdb487
-      size: 3780
+      md5: 06454c936920bf4bc672d3fa7e316fb9
+      size: 2625
     params:
       params.yaml:
         Parameters:
@@ -195,7 +195,7 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Test@4:
     cmd: python3 src/03/main.py 4
