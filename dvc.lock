@@ -4,11 +4,11 @@ stages:
     cmd: python3 src/01/main.py 4
     deps:
     - path: data/00/dataset1/test/4/y.csv
-      md5: ee0cb7712322bcf96a5131b343eff4e9
-      size: 300
+      md5: 25cbe40d91af8e077fc0f3bd60c656e0
+      size: 180
     - path: data/00/dataset1/train/4/x.csv
-      md5: 6f7967356f7b5b8441852efc43b5708a
-      size: 3807
+      md5: c49a5577365ff0b8fafde612351960d8
+      size: 2660
     params:
       params.yaml:
         Parameters:
@@ -23,7 +23,7 @@ stages:
           kfold_nr: 5
           dataset: 1
           multiclassification: false
-          class1: kangaroo
+          class1: camera
           class2: pigeon
   Preprocessing@3:
     cmd: python3 src/01/main.py 3
@@ -106,18 +106,21 @@ stages:
     cmd: python3 src/03/main.py 1
     deps:
     - path: data/01/dataset1/test/1/img_dump/
-      md5: a56c2b2d68ee00a811ace5b8dd837bb3.dir
-      size: 223106
-      nfiles: 27
+      md5: 3e728d9baa76b53410b8b49239130bc0.dir
+      size: 147799
+      nfiles: 19
     - path: data/01/dataset1/test/1/img_dump/labels.csv
-      md5: fd5407863899deb1e8426fb8067b9005
-      size: 708
+      md5: c849ac4d1b31a0e238c3cb63cc84bc5a
+      size: 494
     - path: data/01/dataset1/train/1/img_dump/labels.csv
-      md5: 20c0445747689a070c62e6a5e87aaf2c
-      size: 2870
+      md5: c83aa4153406973781e7e5fd14c875bf
+      size: 1950
     - path: data/02/dataset1/train/1/model_instances.pkl
-      md5: 51b70edc03d6855266931180fa8ff3cf
-      size: 1141
+      md5: eb87201ba53894c0a514ad88661f02d1
+      size: 901
+    - path: src/02/main.py
+      md5: 357efb6b99064e125a6cdc9ddc267a42
+      size: 6111
   Train@4:
     cmd: python3 src/02/main.py 4
     deps:
@@ -134,34 +137,40 @@ stages:
     cmd: python3 src/03/main.py 2
     deps:
     - path: data/01/dataset1/test/2/img_dump/
-      md5: 6eb5772692b3357ef8319593eb776b29.dir
-      size: 206370
-      nfiles: 26
+      md5: 2acfb9a873ee011ef3a29b1d69c6da04.dir
+      size: 155457
+      nfiles: 20
     - path: data/01/dataset1/test/2/img_dump/labels.csv
-      md5: 642c1e5284893b5d5e1b32954266b925
-      size: 712
+      md5: 97d973170891ce2c0f2b5696de111cce
+      size: 494
     - path: data/01/dataset1/train/2/img_dump/labels.csv
-      md5: 88b0957f719cfae1bbafe2dc7a56656e
-      size: 2866
+      md5: 425d155dc79cd3715c69c4f8aeba577a
+      size: 1950
     - path: data/02/dataset1/train/2/model_instances.pkl
-      md5: 51b70edc03d6855266931180fa8ff3cf
-      size: 1141
+      md5: eb87201ba53894c0a514ad88661f02d1
+      size: 901
+    - path: src/02/main.py
+      md5: 357efb6b99064e125a6cdc9ddc267a42
+      size: 6111
   Test@3:
     cmd: python3 src/03/main.py 3
     deps:
     - path: data/01/dataset1/test/3/img_dump/
-      md5: 739ae0ad45e51389fc9112aa482e83e3.dir
-      size: 215624
-      nfiles: 26
+      md5: a1dc7b20354d72176971f7e92a7a0edb.dir
+      size: 138000
+      nfiles: 19
     - path: data/01/dataset1/test/3/img_dump/labels.csv
-      md5: 4bcbecd8fc99a9687cd815b11339dc02
-      size: 708
+      md5: 0ee04e03a6393e04d381e07a7290b081
+      size: 494
     - path: data/01/dataset1/train/3/img_dump/labels.csv
-      md5: 46f4b714e35ef80672d2497b01633d76
-      size: 2870
+      md5: 8bcc87baafac920735d1a916e364304b
+      size: 1950
     - path: data/02/dataset1/train/3/model_instances.pkl
-      md5: 51b70edc03d6855266931180fa8ff3cf
-      size: 1141
+      md5: eb87201ba53894c0a514ad88661f02d1
+      size: 901
+    - path: src/02/main.py
+      md5: 357efb6b99064e125a6cdc9ddc267a42
+      size: 6111
   Reporting@4:
     cmd: python3 src/04/main.py 4
     deps:
@@ -201,18 +210,21 @@ stages:
     cmd: python3 src/03/main.py 4
     deps:
     - path: data/01/dataset1/test/4/img_dump/
-      md5: 3c53d8d0cda3ae321f6afd4b4a9c0aa8.dir
-      size: 223322
-      nfiles: 25
+      md5: 001827182f29ce9393f923c93f7d7d89.dir
+      size: 115236
+      nfiles: 17
     - path: data/01/dataset1/test/4/img_dump/labels.csv
-      md5: 334121261ef7c55c5fb60401ce4db112
-      size: 716
+      md5: b0077e91202e1e215b390aaf69d236d5
+      size: 468
     - path: data/01/dataset1/train/4/img_dump/labels.csv
-      md5: 7e45cf5fb34ab273d3bbbb1ce3bbb1e2
-      size: 2862
+      md5: a05f122d6fa351193ed23643a6cd11c1
+      size: 1976
     - path: data/02/dataset1/train/4/model_instances.pkl
-      md5: 51b70edc03d6855266931180fa8ff3cf
-      size: 1141
+      md5: 276c555ca7c6622fd7f06f0da43ac437
+      size: 909
+    - path: src/02/main.py
+      md5: 357efb6b99064e125a6cdc9ddc267a42
+      size: 6111
   Reporting@3:
     cmd: python3 src/04/main.py 3
     deps:
@@ -227,11 +239,11 @@ stages:
     cmd: python3 src/01/main.py 2
     deps:
     - path: data/00/dataset1/test/2/y.csv
-      md5: 8f336f47f80dbbbc7ac16da2a8b09cf1
-      size: 296
+      md5: f301a362c3024389662d39e45118be5d
+      size: 190
     - path: data/00/dataset1/train/2/x.csv
-      md5: 1e66773c94a9da80921d2f57912780fa
-      size: 3811
+      md5: 9832f55d4f4432c7549c9c153700b87b
+      size: 2625
     params:
       params.yaml:
         Parameters:
@@ -353,15 +365,18 @@ stages:
     cmd: python3 src/03/main.py 0
     deps:
     - path: data/01/dataset1/test/0/img_dump/
-      md5: 8d858da6ff771382670c2cb2fcda4d0e.dir
-      size: 235645
-      nfiles: 28
+      md5: 27b00ee27aab8edbe972a0aa315fd519.dir
+      size: 118347
+      nfiles: 18
     - path: data/01/dataset1/test/0/img_dump/labels.csv
-      md5: d8944435818c20da7b875c52f77b8439
-      size: 734
+      md5: 1e3bd012c65b30ddb14a8cbba258a71d
+      size: 494
     - path: data/01/dataset1/train/0/img_dump/labels.csv
-      md5: a23fe00d690027b5a4fbf12429dddfba
-      size: 2844
+      md5: 74a94038d4681262f74554108abd791b
+      size: 1950
     - path: data/02/dataset1/train/0/model_instances.pkl
-      md5: 4ca643adc005a0aad5e5698a70ce76b0
-      size: 1133
+      md5: eb87201ba53894c0a514ad88661f02d1
+      size: 901
+    - path: src/02/main.py
+      md5: 357efb6b99064e125a6cdc9ddc267a42
+      size: 6111
