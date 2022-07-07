@@ -6,7 +6,7 @@ feature_extration:
 kfold_nr: 5
 multiclassification: false
 ncd_baseline:
-  ncd_type: jpeg_compression
+  ncd_type: jpeg_compressionVertical
 preprocess:
   label: true
   split: true

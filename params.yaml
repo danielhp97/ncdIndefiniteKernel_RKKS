@@ -6,7 +6,7 @@ Parameters:
   feature_extration:
     rotation_ncd: True
   ncd_baseline:
-    ncd_type : jpeg_compression
+    ncd_type : jpeg_compressionVertical
   kfold_nr: 5
   dataset: 1
   multiclassification: False

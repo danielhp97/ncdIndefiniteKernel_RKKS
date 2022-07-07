@@ -32,7 +32,21 @@ def ncd_preparation(dataset, ncd_type):
     path_list = data['Path']
     counter_x = 0
     for i in path_list:
-        if ncd_type == 'jpeg_compression':
+        if ncd_type == 'jpeg_compressionVertical':
+            start_time = time.time()
+            print("imagem x: {0}".format(counter_x))
+            temp = Image.open(i)
+            temp = image_filtering(temp)
+            # write image as jpeg to temp (with quality parameters)
+            temp = temp.save("temp/ncd_tempImg.jpg")
+            # load image as temp
+            temp = Image.open("temp/ncd_tempImg.jpg")
+            temp = np.array(temp)
+            # transform to 16 unsigned array
+            np_images.append(temp)
+            counter_x +=1
+            print("Tempo de execucao: {}".format(time.time()-start_time))
+        elif ncd_type == 'jpeg_compression':
             start_time = time.time()
             print("imagem x: {0}".format(counter_x))
             temp = Image.open(i)
