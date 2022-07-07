@@ -4,11 +4,11 @@ stages:
     cmd: python3 src/01/main.py 4
     deps:
     - path: data/00/dataset1/test/4/y.csv
-      md5: 9dc5b13e9b20e6e11d69382513895b8b
-      size: 292
+      md5: 31bccaedf586513b27ca3ecd50c9eb3f
+      size: 308
     - path: data/00/dataset1/train/4/x.csv
-      md5: 9266f0abb2e448c2f1d9da99b3a00615
-      size: 3965
+      md5: 6e433eff9b159c4e3e62142192a7e450
+      size: 3949
     params:
       params.yaml:
         Parameters:
@@ -19,7 +19,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -29,11 +29,11 @@ stages:
     cmd: python3 src/01/main.py 3
     deps:
     - path: data/00/dataset1/test/3/y.csv
-      md5: d8baab85b150afab23d395fce882ad17
-      size: 312
+      md5: 8b48f46e411a0192a2e7aca6670e4452
+      size: 296
     - path: data/00/dataset1/train/3/x.csv
-      md5: d553192fe3f1c0b5f91ea175136d7caf
-      size: 3945
+      md5: a1fdd3b54c97c018d49eabe67a478005
+      size: 3961
     params:
       params.yaml:
         Parameters:
@@ -44,7 +44,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -54,10 +54,10 @@ stages:
     cmd: python3 src/02/main.py 3
     deps:
     - path: data/01/dataset1/train/3/img_dump/labels.csv
-      md5: 705435587633644c2ec906c66938d3fb
-      size: 2964
+      md5: afa98c99b1f26b45ef2feee390f4c5be
+      size: 2980
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 7706fda6d579465248b14797f63bcc1e
+      md5: 6cdb46b94a916001fb21b69d14556682
       size: 148096
     - path: data/dataset1/labels.csv
       md5: 83c7175058d8cceb01c048c6fb773552
@@ -66,10 +66,10 @@ stages:
     cmd: python3 src/02/main.py 1
     deps:
     - path: data/01/dataset1/train/1/img_dump/labels.csv
-      md5: 43ded3358bc763a5043dff11830596c1
-      size: 2972
+      md5: 9c6ee1b3583079d35d43cf55ae186e2d
+      size: 2968
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 7706fda6d579465248b14797f63bcc1e
+      md5: 6cdb46b94a916001fb21b69d14556682
       size: 148096
     - path: data/dataset1/labels.csv
       md5: 83c7175058d8cceb01c048c6fb773552
@@ -84,8 +84,8 @@ stages:
       md5: 4b207642a49d0650e4dd327d1c90a639
       size: 4720
     - path: src/00/ncd.py
-      md5: 717574259b6e7108dd65f097e0e4f14c
-      size: 3146
+      md5: 8ea0f282e97d524ec45ea90608c4ef5c
+      size: 3450
     params:
       params.yaml:
         Parameters:
@@ -96,7 +96,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -106,29 +106,29 @@ stages:
     cmd: python3 src/03/main.py 1
     deps:
     - path: data/01/dataset1/test/1/img_dump/
-      md5: 3e728d9baa76b53410b8b49239130bc0.dir
-      size: 147799
-      nfiles: 19
+      md5: 83472fdff33981ffc9bbbeb86e0bbc51.dir
+      size: 229246
+      nfiles: 27
     - path: data/01/dataset1/test/1/img_dump/labels.csv
-      md5: c849ac4d1b31a0e238c3cb63cc84bc5a
-      size: 494
+      md5: 5234741d3dfea59ed3628e0f6fec7173
+      size: 740
     - path: data/01/dataset1/train/1/img_dump/labels.csv
-      md5: c83aa4153406973781e7e5fd14c875bf
-      size: 1950
+      md5: 9c6ee1b3583079d35d43cf55ae186e2d
+      size: 2968
     - path: data/02/dataset1/train/1/model_instances.pkl
-      md5: eb87201ba53894c0a514ad88661f02d1
-      size: 901
+      md5: cb0cb41108387ac5361bdb8857145af2
+      size: 1173
     - path: src/02/main.py
-      md5: 357efb6b99064e125a6cdc9ddc267a42
-      size: 6111
+      md5: b8f9a97194e7b05177b6635ef65e574b
+      size: 6005
   Train@4:
     cmd: python3 src/02/main.py 4
     deps:
     - path: data/01/dataset1/train/4/img_dump/labels.csv
-      md5: 52a193658297d26940750b2f6925a797
-      size: 2984
+      md5: 1c1ced646cd43263bbcd163ad96d344b
+      size: 2968
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 7706fda6d579465248b14797f63bcc1e
+      md5: 6cdb46b94a916001fb21b69d14556682
       size: 148096
     - path: data/dataset1/labels.csv
       md5: 83c7175058d8cceb01c048c6fb773552
@@ -137,17 +137,17 @@ stages:
     cmd: python3 src/03/main.py 2
     deps:
     - path: data/01/dataset1/test/2/img_dump/
-      md5: 7acd8dab4103a721debc3596f522cc88.dir
-      size: 232393
-      nfiles: 26
+      md5: 0ad239d38e94b2e617d0e34be790ae62.dir
+      size: 228740
+      nfiles: 28
     - path: data/01/dataset1/test/2/img_dump/labels.csv
-      md5: 418cbc619ae603caba8f791f0426532b
-      size: 740
+      md5: 538bfbeeabded9d3f1f6c21e065437ac
+      size: 736
     - path: data/01/dataset1/train/2/img_dump/labels.csv
-      md5: 08956a5b4af730e6aab26f27252a7c3b
-      size: 2968
+      md5: e8514156aab330f8db704eb32831d119
+      size: 2972
     - path: data/02/dataset1/train/2/model_instances.pkl
-      md5: cb0cb41108387ac5361bdb8857145af2
+      md5: 450fe4262ef7fb0dd19e3c8bdf34c11f
       size: 1173
     - path: src/02/main.py
       md5: b8f9a97194e7b05177b6635ef65e574b
@@ -156,31 +156,31 @@ stages:
     cmd: python3 src/03/main.py 3
     deps:
     - path: data/01/dataset1/test/3/img_dump/
-      md5: a1dc7b20354d72176971f7e92a7a0edb.dir
-      size: 138000
-      nfiles: 19
+      md5: f5e4db14a4f667856a343c2697184c1a.dir
+      size: 204416
+      nfiles: 25
     - path: data/01/dataset1/test/3/img_dump/labels.csv
-      md5: 0ee04e03a6393e04d381e07a7290b081
-      size: 494
+      md5: 4c6abec49a3a91f57a3b93b4323e18de
+      size: 728
     - path: data/01/dataset1/train/3/img_dump/labels.csv
-      md5: 8bcc87baafac920735d1a916e364304b
-      size: 1950
+      md5: afa98c99b1f26b45ef2feee390f4c5be
+      size: 2980
     - path: data/02/dataset1/train/3/model_instances.pkl
-      md5: eb87201ba53894c0a514ad88661f02d1
-      size: 901
+      md5: 450fe4262ef7fb0dd19e3c8bdf34c11f
+      size: 1173
     - path: src/02/main.py
-      md5: 357efb6b99064e125a6cdc9ddc267a42
-      size: 6111
+      md5: b8f9a97194e7b05177b6635ef65e574b
+      size: 6005
   Reporting@4:
     cmd: python3 src/04/main.py 4
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 7a9c7282e68d952ba3eefb71e824a87a
-      size: 4897
+      md5: d297b9d7b806570e1c5642d2d0d8e6c7
+      size: 1804
     outs:
     - path: metrics/metrics4.json
-      md5: 5c153430d14c7e2b9452f6ceabd83306
-      size: 38
+      md5: 8b6a1ded0a1b3193a7c771a78d458d15
+      size: 54
   Preprocessing@0:
     cmd: python3 src/01/main.py 0
     deps:
@@ -188,7 +188,7 @@ stages:
       md5: 54556e830cb8d9a0f2c49c905b88defb
       size: 316
     - path: data/00/dataset1/train/0/x.csv
-      md5: 799ecba893085514dc9d90453c3d2425
+      md5: 61a687a83dbbd6c346c15553a1f2557e
       size: 3916
     params:
       params.yaml:
@@ -200,7 +200,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -210,17 +210,17 @@ stages:
     cmd: python3 src/03/main.py 4
     deps:
     - path: data/01/dataset1/test/4/img_dump/
-      md5: dfab32620d6d9f36860273014b87bae5.dir
-      size: 201040
+      md5: cc6544760bd0a28c6392b6be7a78e210.dir
+      size: 211885
       nfiles: 25
     - path: data/01/dataset1/test/4/img_dump/labels.csv
-      md5: 238fd7c0a226e4302f20b50be7017b54
-      size: 724
+      md5: e4595172d51e0e3d086a96b3ec0207da
+      size: 740
     - path: data/01/dataset1/train/4/img_dump/labels.csv
-      md5: 52a193658297d26940750b2f6925a797
-      size: 2984
+      md5: 1c1ced646cd43263bbcd163ad96d344b
+      size: 2968
     - path: data/02/dataset1/train/4/model_instances.pkl
-      md5: cb0cb41108387ac5361bdb8857145af2
+      md5: 450fe4262ef7fb0dd19e3c8bdf34c11f
       size: 1173
     - path: src/02/main.py
       md5: b8f9a97194e7b05177b6635ef65e574b
@@ -229,45 +229,20 @@ stages:
     cmd: python3 src/04/main.py 3
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 7a9c7282e68d952ba3eefb71e824a87a
-      size: 4897
+      md5: d297b9d7b806570e1c5642d2d0d8e6c7
+      size: 1804
     outs:
     - path: metrics/metrics3.json
-      md5: ec5fcaa2483aa8399245dd0fa628b70f
-      size: 54
+      md5: fa311251b6e3097d20b6d90bdabfe2af
+      size: 38
   Preprocessing@2:
     cmd: python3 src/01/main.py 2
     deps:
     - path: data/00/dataset1/test/2/y.csv
-      md5: 31bccaedf586513b27ca3ecd50c9eb3f
-      size: 308
-    - path: data/00/dataset1/train/2/x.csv
-      md5: 2eb4c712f49235f17e78815355d52e83
-      size: 3949
-    params:
-      params.yaml:
-        Parameters:
-          preprocess:
-            label: true
-            subset: true
-            split: true
-          feature_extration:
-            rotation_ncd: true
-          ncd_baseline:
-            ncd_type: jpeg_compression
-          kfold_nr: 5
-          dataset: 1
-          multiclassification: false
-          class1: camera
-          class2: kangaroo
-  Preprocessing@1:
-    cmd: python3 src/01/main.py 1
-    deps:
-    - path: data/00/dataset1/test/1/y.csv
       md5: b0e7bdd4edb512eb1e2e6385eff633c3
       size: 304
-    - path: data/00/dataset1/train/1/x.csv
-      md5: d343584a0edeccef418449348ff6af1e
+    - path: data/00/dataset1/train/2/x.csv
+      md5: 5135241433836611369acc3a4015e723
       size: 3953
     params:
       params.yaml:
@@ -279,7 +254,32 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
+          kfold_nr: 5
+          dataset: 1
+          multiclassification: false
+          class1: camera
+          class2: kangaroo
+  Preprocessing@1:
+    cmd: python3 src/01/main.py 1
+    deps:
+    - path: data/00/dataset1/test/1/y.csv
+      md5: 31bccaedf586513b27ca3ecd50c9eb3f
+      size: 308
+    - path: data/00/dataset1/train/1/x.csv
+      md5: 2d03a2022630719e5d70a58a193916fb
+      size: 3949
+    params:
+      params.yaml:
+        Parameters:
+          preprocess:
+            label: true
+            subset: true
+            split: true
+          feature_extration:
+            rotation_ncd: true
+          ncd_baseline:
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -289,10 +289,10 @@ stages:
     cmd: python3 src/02/main.py 0
     deps:
     - path: data/01/dataset1/train/0/img_dump/labels.csv
-      md5: 4d4163622299bc590ed3863dd75f5464
+      md5: 90fa68c6c1eda15d8aa98c9fc89ceccb
       size: 2944
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 7706fda6d579465248b14797f63bcc1e
+      md5: 6cdb46b94a916001fb21b69d14556682
       size: 148096
     - path: data/dataset1/labels.csv
       md5: 83c7175058d8cceb01c048c6fb773552
@@ -301,62 +301,62 @@ stages:
     cmd: python3 src/04/main.py 2
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 7a9c7282e68d952ba3eefb71e824a87a
-      size: 4897
+      md5: d297b9d7b806570e1c5642d2d0d8e6c7
+      size: 1804
     outs:
     - path: metrics/metrics2.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
+      md5: bb7bda3f25171fbe30607de53227cb76
+      size: 54
   Reporting@0:
     cmd: python3 src/04/main.py 0
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 7a9c7282e68d952ba3eefb71e824a87a
-      size: 4897
+      md5: d297b9d7b806570e1c5642d2d0d8e6c7
+      size: 1804
     outs:
     - path: metrics/metrics0.json
-      md5: 68e65d135d35eb345355bd26c9842e22
-      size: 53
+      md5: 102942c14473348bdf9edaa36181f71f
+      size: 38
   Reporting@1:
     cmd: python3 src/04/main.py 1
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 7a9c7282e68d952ba3eefb71e824a87a
-      size: 4897
+      md5: d297b9d7b806570e1c5642d2d0d8e6c7
+      size: 1804
     outs:
     - path: metrics/metrics1.json
-      md5: 41b08df12d3b3bbf7b5f4e0ddcfb63ee
+      md5: 8b6a1ded0a1b3193a7c771a78d458d15
       size: 54
   Overall_metrics:
     cmd: python3 src/04/overall.py
     deps:
     - path: metrics/metrics0.json
-      md5: 68e65d135d35eb345355bd26c9842e22
-      size: 53
+      md5: 102942c14473348bdf9edaa36181f71f
+      size: 38
     - path: metrics/metrics1.json
-      md5: 41b08df12d3b3bbf7b5f4e0ddcfb63ee
+      md5: 8b6a1ded0a1b3193a7c771a78d458d15
       size: 54
     - path: metrics/metrics2.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
-    - path: metrics/metrics3.json
-      md5: ec5fcaa2483aa8399245dd0fa628b70f
+      md5: bb7bda3f25171fbe30607de53227cb76
       size: 54
-    - path: metrics/metrics4.json
-      md5: 5c153430d14c7e2b9452f6ceabd83306
+    - path: metrics/metrics3.json
+      md5: fa311251b6e3097d20b6d90bdabfe2af
       size: 38
+    - path: metrics/metrics4.json
+      md5: 8b6a1ded0a1b3193a7c771a78d458d15
+      size: 54
     outs:
     - path: metrics/final_metrics.json
-      md5: 78e9542a7bd0986f3c769d465e071f4e
+      md5: 8301ebd5a469819c44e08746d5064d1c
       size: 64
   Train@2:
     cmd: python3 src/02/main.py 2
     deps:
     - path: data/01/dataset1/train/2/img_dump/labels.csv
-      md5: 08956a5b4af730e6aab26f27252a7c3b
-      size: 2968
+      md5: e8514156aab330f8db704eb32831d119
+      size: 2972
     - path: data/dataset1/kernel/kernelmatrix.npy
-      md5: 7706fda6d579465248b14797f63bcc1e
+      md5: 6cdb46b94a916001fb21b69d14556682
       size: 148096
     - path: data/dataset1/labels.csv
       md5: 83c7175058d8cceb01c048c6fb773552
@@ -365,27 +365,27 @@ stages:
     cmd: python3 src/03/main.py 0
     deps:
     - path: data/01/dataset1/test/0/img_dump/
-      md5: 27b00ee27aab8edbe972a0aa315fd519.dir
-      size: 118347
-      nfiles: 18
+      md5: 94343b3b2a003a4b1f0e1caa3b53de11.dir
+      size: 220664
+      nfiles: 27
     - path: data/01/dataset1/test/0/img_dump/labels.csv
-      md5: 1e3bd012c65b30ddb14a8cbba258a71d
-      size: 494
+      md5: ca3c15c79cbe217acfde01be84d6a807
+      size: 764
     - path: data/01/dataset1/train/0/img_dump/labels.csv
-      md5: 74a94038d4681262f74554108abd791b
-      size: 1950
+      md5: 90fa68c6c1eda15d8aa98c9fc89ceccb
+      size: 2944
     - path: data/02/dataset1/train/0/model_instances.pkl
-      md5: eb87201ba53894c0a514ad88661f02d1
-      size: 901
+      md5: 698e2ea79520fdd3ad9f923aca177313
+      size: 1165
     - path: src/02/main.py
-      md5: 357efb6b99064e125a6cdc9ddc267a42
-      size: 6111
+      md5: b8f9a97194e7b05177b6635ef65e574b
+      size: 6005
   Data_Preprocessing:
     cmd: python3 src/00/main.py
     deps:
     - path: data/dataset1/
-      md5: ba4b67709b9a74273f169a626d3c94b2.dir
-      size: 168585568
+      md5: 0e6d10fcc2c4eed9122120065fe170a9.dir
+      size: 168803736
       nfiles: 9150
     params:
       params.yaml:
@@ -397,7 +397,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compression
+            ncd_type: jpeg_compressionVertical
           kfold_nr: 5
           dataset: 1
           multiclassification: false
