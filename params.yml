@@ -1,5 +1,5 @@
 class1: camera
-class2: pigeon
+class2: kangaroo
 dataset: 1
 feature_extration:
   rotation_ncd: true

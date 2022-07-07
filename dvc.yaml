@@ -1,14 +1,14 @@
 stages:
-  #Data_Preprocessing:
-  #  cmd: python3 src/00/main.py
-  #  deps:
-  #    - data/dataset${Parameters.dataset}/
-  #  params:
-  #    - Parameters
-  #  outs:
-  #    - data/00/dataset${Parameters.dataset}/train/
-  #    - data/00/dataset${Parameters.dataset}/test/
-  #    - data/dataset${Parameters.dataset}/labels.csv
+  Data_Preprocessing:
+    cmd: python3 src/00/main.py
+    deps:
+      - data/dataset${Parameters.dataset}/
+    params:
+      - Parameters
+    #outs:
+    #  - data/00/dataset${Parameters.dataset}/train/
+    #  - data/00/dataset${Parameters.dataset}/test/
+    #  - data/dataset${Parameters.dataset}/labels.csv
   Preprocessing:
     foreach: ${General.kfold_iterations}
     do:

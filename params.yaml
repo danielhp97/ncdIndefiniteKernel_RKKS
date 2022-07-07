@@ -11,7 +11,7 @@ Parameters:
   dataset: 1
   multiclassification: False
   class1 : 'camera'
-  class2 : 'pigeon'
+  class2 : 'kangaroo'
 General:
   kfold_iterations:
     - 0

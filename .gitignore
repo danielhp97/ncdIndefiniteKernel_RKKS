@@ -1,4 +1,4 @@
-data
-metric
+metrics
 temp
-/data-file.bin
+/data
+/env
