@@ -1,4 +1,5 @@
 [core]
     hardlink_lock = true
+    autostage = true
 ['remote "origin"']
     url = https://dagshub.com/danielhp97/ncdIndefiniteKernel_RKKS.dvc
