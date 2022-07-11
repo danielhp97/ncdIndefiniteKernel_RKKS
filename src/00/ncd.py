@@ -1,9 +1,10 @@
-import os
+import sys
 import numpy as np
 import pandas as pd
 import yaml
 import time
 from PIL import Image
+from io import BytesIO
 try:
     import lzma
 except ImportError:
@@ -21,10 +22,10 @@ class Ncd():
 
     def compress_image(self, i): # read array and get compressed image from position given
         # read path and array
-        array_obj = np.load("data/dataset1/kernel/compressedImages.npy") # need to check the path
-        image = array_obj[i] # get positon
-        # return image len
-        return len(image)
+        array_obj = np.load("data/dataset1/kernel/compressedImagesSize.npy", allow_pickle=True) # need to check the path
+        size = array_obj[i] # get positon
+        # return number of bytes
+        return size
 
     def ncd(self,x,y, len_x_comp, len_y_comp):
         if type(x)=="numpy.ndarray":
@@ -59,8 +60,18 @@ class Ncd():
             for j in range(i,n): # for each row, iterate over each element +1
                 print("linha {}; coluna {}".format(i,j))
                 start_time = time.time()
-                len_x_comp = self.compress_image(i=i) # get compressed image from position
-                len_y_comp = self.compress_image(i=j) # get compressed image from position
+                x_comp = self.compress_image(i=i) # get compressed image from position
+                x_comp = np.asarray(x_comp)
+                x_comp = Image.fromarray(x_comp)
+                y_comp = self.compress_image(i=j) # get compressed image from position
+                y_comp = np.asarray(y_comp)
+                y_comp = Image.fromarray(y_comp)
+                bytex = BytesIO()
+                bytey = BytesIO()
+                x_comp.save(bytex, 'jpeg')
+                y_comp.save(bytey, 'jpeg')
+                len_x_comp = bytex.tell()
+                len_y_comp = bytey.tell()
                 if ncd_type == 'jpeg_compression':
                     K[i,j] = self.ncd_jpeg2000(list_of_images[i], list_of_images[j], len_x_comp, len_y_comp) # calculate ncd
                     print("Exec time: {}".format(time.time()-start_time))
@@ -72,15 +83,29 @@ class Ncd():
         return K # return matrix
 
     def ncd_jpeg2000vertical(self,x,y,len_x_comp, len_y_comp):
-        x_y = np.concatenate((x,y), axis = 1)
-        ncd = (len(x_y) - min(len_x_comp, len_y_comp)) / \
+        x_y = np.concatenate((x,y), axis = 0)
+        x_y = Image.fromarray(x_y)
+        bytes = BytesIO()
+        x_y.save(bytes,'jpeg')
+        lenx_y = bytes.tell()
+        #lenx_y = sys.getsizeof(x_y)
+        ncd = (lenx_y - min(len_x_comp, len_y_comp)) / \
         max(len_x_comp, len_y_comp)
         return ncd
 
 
     def ncd_jpeg2000(self,x,y,len_x_comp, len_y_comp):
         x_y = np.concatenate((x,y), axis = 0)
-        ncd = (len(x_y) - min(len_x_comp, len_y_comp)) / \
+        x_y = Image.fromarray(x_y)
+        bytes = BytesIO()
+        x_y.save(bytes,'jpeg')
+        lenx_y = bytes.tell()
+        # compress x_y
+        #lenx_y = sys.getsizeof(x_y)
+        print("Size of Concatenated Image: {}".format(lenx_y))
+        print("Size of x Image: {}".format(len_x_comp))
+        print("Size of y Image: {}".format(len_y_comp))
+        ncd = (lenx_y - min(len_x_comp, len_y_comp)) / \
         max(len_x_comp, len_y_comp)
         return ncd
 

@@ -7,6 +7,7 @@ import yaml
 import numpy as np
 import pandas as pd
 import pickle
+from io import BytesIO
 import time
 from PIL import Image
 from PIL.ImageFilter import MedianFilter, BLUR 
@@ -39,10 +40,9 @@ def ncd_preparation(dataset, ncd_type):
             temp = image_filtering(temp)
             # write image as jpeg to temp (with quality parameters)
             temp = temp.save("temp/ncd_tempImg.jpg")
-            # read nr bytes
-            # save it on memory
             # load image as temp
             temp = Image.open("temp/ncd_tempImg.jpg")
+            temp = np.array(temp)
             # transform to 16 unsigned array
             np_images.append(temp)
             counter_x +=1
@@ -56,6 +56,7 @@ def ncd_preparation(dataset, ncd_type):
             temp = temp.save("temp/ncd_tempImg.jpg")
             # load image as temp
             temp = Image.open("temp/ncd_tempImg.jpg")
+            temp = np.array(temp)
             # transform to 16 unsigned array
             np_images.append(temp)
             counter_x +=1
@@ -109,43 +110,38 @@ if __name__ == "__main__":
     params=params['Parameters']
     dataset_number = params['dataset']
     ncd_type = params['ncd_baseline']['ncd_type']
-    # what to do:
-    # open /data/dataset1/labels.csv into a dataframe
-    prepared_dataframe = pd.DataFrame(columns= ["ImageName","Class","Path"])
-    counter = 1
-    f = open("data/dataset{}/labels.csv".format(str(dataset_number)), "r")
-    for line in f:
-        entry = line[2:-1]
-        entry = entry[0:-2]
-        entry = entry.split(",")
-        df_length= len(prepared_dataframe)
-        prepared_dataframe.loc[df_length] = entry
-        print("finished adding line {}".format(counter))
-        counter += 1
-    f.close()
-    is_filtered = prepared_dataframe[prepared_dataframe["Class"].isin([str(" '" + params['class1'] + "'"), str(" '" + params['class2'] + "'")])]
-    #cleaning dataset
-    is_filtered['Path'] = is_filtered['Path'].str.lstrip(" '")
-    is_filtered['Path'] = is_filtered['Path'].str.rstrip("'")
-    # ncd_preparation + resize images # remove black and white images
-    print(" finished preparing label file")
-    print("started compressing dataset")
-    np_images = ncd_preparation(is_filtered, ncd_type)
-    print(len(np_images))
-    counter_teste = 1
-    for i in np_images:
-        print("Imagem nr: {0} -> shape: {1}".format(counter_teste,i))
-        counter_teste+=1
-
-    np.save('data/dataset{0}/kernel/compressedImagesSize'.format(dataset_number), np_images)
-    print(len(np_images))
-    print("Finished compressing")
-    # ncd_kernel
-    np_images= np.load('data/dataset{0}/kernel/compressedImagesSize.npy'.format(dataset_number), allow_pickle=True)
+    
+    com_images = np.load("data/dataset1/kernel/compressedImagesSize.npy", allow_pickle=True)
+    kernel_matrix = np.load("data/dataset1/kernel/kernelmatrix.npy")
+    print("Kernel Matrix:")
+    print(pd.DataFrame(kernel_matrix))
+    original_img1 = com_images[2]
+    original_img2 = com_images[34]
+    calc = Ncd()
+    print("________ compressed images test_________")
+    #length image 1
+    img1 = com_images[2]
+    img1 = np.asarray(img1)
+    img1 = Image.fromarray(img1)
+    byteimg1 = BytesIO()
+    img1.save(byteimg1, 'jpeg')
+    lenimg1 = byteimg1.tell()
 
 
-    print("Starting kernel calculation")
-    kernel = ncd_kernel(np_images)
-    # output kernel
-    # pre compress images
-    np.save('data//dataset{0}/kernel/kernelmatrix'.format(dataset_number), kernel)
+    #length image 2
+    img2 = com_images[34]
+    img2 = np.asarray(img2)
+    img2 = Image.fromarray(img2)
+    byteimg2 = BytesIO()
+    img2.save(byteimg2, 'jpeg')
+    lenimg2 = byteimg2.tell()
+
+
+    print("Length of Image 1: {}".format(lenimg1))
+    print("Length of Image 2: {}".format(lenimg2))
+
+    print("________ ncd test_________")
+    test = calc.ncd_jpeg2000(img1,img2,lenimg1,lenimg2)
+    print("Ncd with Horizontal Concatenation: {}".format(test))
+    test = calc.ncd_jpeg2000vertical(img1,img2,lenimg1,lenimg2)
+    print("Ncd with Vertical Concatenation: {}".format(test))
