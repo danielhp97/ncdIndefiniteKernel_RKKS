@@ -23,9 +23,7 @@ def data_preparation(base_dir, split="test"):
 def compare_indices(generalDf, trainDf):
     index_list = []
     for row in trainDf['truePath'].iteritems():
-        print(row[1])
         indexes = generalDf.index[generalDf['truePath']==row[1]]
-        print(indexes)
         index_list.append(indexes[0])
     return(index_list)
         
@@ -100,22 +98,27 @@ if __name__ == "__main__":
     # create separate lists according to the label of the image ()
     base_dir = "data/01/dataset" + str(dataset_number) + "/"
     data_dicts = data_preparation(base_dir) # outputs a dict with various datasets
-    # we need to iterate each dataset
-    # pegar no data/01/dataset/test/labels
-    # kernel should be calculated here
+    data_dataframe = pd.DataFrame(columns=['image', 'labels'])
+    #data_dataframe = pd.DataFrame.from_dict(data_dicts)
     for key in data_dicts:
-        # create new class instance for each data that exists
-        # precisamos do ficheiro das labels,
-        kernel = np.load("data/dataset{}/kernel/kernelmatrix.npy".format(dataset_number))
-        label_dir = "data/01/dataset{}/train/{}/img_dump/".format(dataset_number, i)
-        image_list, label_list = path_to_array(label_dir, class1, class2)
-        # change class 1 to 1 and class 2 to -1
-        label_list = [1 if i==class1 else -1 for i in label_list]
-        label_list = np.array(label_list)
-        # nova funcao, vai retornar uma lista com as imagens e outra com as labels
-        indices = get_training_indices(kernel, 'data/dataset{0}/labels.csv'.format(dataset_number), class1, class2) #dictionary of training indices
-        kernel_cut = Ncd.get_training_matrix(kernel, indices, dataset_number)
-        model_instance = train_model(kernel_cut, label_list)
+        temp = data_dicts[key]
+        temp.columns=('image', 'labels')
+        data_dataframe = data_dataframe.append(temp)
+    kernel = np.load("data/dataset{}/kernel/kernelmatrix.npy".format(dataset_number))
+    label_dir = "data/01/dataset{}/train/{}/img_dump/".format(dataset_number, i)
+    image_list, label_list = path_to_array(label_dir, class1, class2)
+    
+    label_list = [item.lstrip(" '") for item in label_list]
+    label_list = [item.rstrip("'") for item in label_list]
+    # change class 1 to 1 and class 2 to -1
+    key_striped = key.lstrip(" '")
+    key_striped = key_striped.rstrip("' ")
+    label_list = [1 if item==class1 else -1 for item in label_list]
+    label_list = np.array(label_list)
+    # nova funcao, vai retornar uma lista com as imagens e outra com as labels
+    indices = get_training_indices(kernel, 'data/dataset{0}/labels.csv'.format(dataset_number), class1, class2) #dictionary of training indices
+    kernel_cut = Ncd.get_training_matrix(kernel, indices, dataset_number)
+    model_instance = train_model(kernel_cut, label_list)
     
     # store images to be used later on other for testing
     dir_cleaning(i)

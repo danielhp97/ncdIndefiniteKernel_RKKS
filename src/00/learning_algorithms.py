@@ -109,8 +109,6 @@ class SquareHingeKreinSVM(Model):
 		self.requires_eigen_decomposition = True
 
 	def fit(self, X, y):
-		print(X)
-		print(y)
 		if np.any(y == 0):
 			y[y == 0] = -1
 		if isinstance(X, dict):

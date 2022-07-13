@@ -6,7 +6,7 @@ import os
 import yaml
 import numpy as np
 import pandas as pd
-import pickle
+import paq as pq
 import time
 from PIL import Image
 from PIL.ImageFilter import MedianFilter, BLUR 
@@ -38,11 +38,12 @@ def ncd_preparation(dataset, ncd_type):
             temp = Image.open(i)
             temp = image_filtering(temp)
             # write image as jpeg to temp (with quality parameters)
-            temp = temp.save("temp/ncd_tempImg.jpg")
+            temp.save("temp/compressedfinalimg/ncd_tempImg{}.jpg".format(counter_x))
+            temp = np.asarray(temp)
             # read nr bytes
             # save it on memory
             # load image as temp
-            temp = Image.open("temp/ncd_tempImg.jpg")
+            #temp = Image.open("temp/ncd_tempImg.jpg")
             # transform to 16 unsigned array
             np_images.append(temp)
             counter_x +=1
@@ -57,6 +58,14 @@ def ncd_preparation(dataset, ncd_type):
             # load image as temp
             temp = Image.open("temp/ncd_tempImg.jpg")
             # transform to 16 unsigned array
+            np_images.append(temp)
+            counter_x +=1
+            print("Tempo de execucao: {}".format(time.time()-start_time))
+        elif ncd_type == 'ppm_pq9':
+            start_time = time.time()
+            print("imagem x: {0}".format(counter_x))
+            temp = Image.open(i)
+            temp = image_filtering(temp)
             np_images.append(temp)
             counter_x +=1
             print("Tempo de execucao: {}".format(time.time()-start_time))
@@ -131,6 +140,7 @@ if __name__ == "__main__":
     print(" finished preparing label file")
     print("started compressing dataset")
     np_images = ncd_preparation(is_filtered, ncd_type)
+    print(np_images)
     print(len(np_images))
     counter_teste = 1
     for i in np_images:
