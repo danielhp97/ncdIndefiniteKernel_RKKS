@@ -81,11 +81,11 @@ stages:
       md5: 83c7175058d8cceb01c048c6fb773552
       size: 661665
     - path: src/00/learning_algorithms.py
-      md5: 4b207642a49d0650e4dd327d1c90a639
-      size: 4720
+      md5: 65393c7b5436a10426b2e8fbec0eb20d
+      size: 4698
     - path: src/00/ncd.py
-      md5: 9d9c5f5a93f7321bad4e3113a7bac76c
-      size: 5913
+      md5: 2e1af9287f6770196187394fa7e41dbf
+      size: 7856
     params:
       params.yaml:
         Parameters:
@@ -96,7 +96,7 @@ stages:
           feature_extration:
             rotation_ncd: true
           ncd_baseline:
-            ncd_type: jpeg_compressionVertical
+            ncd_type: PNG
           kfold_nr: 5
           dataset: 1
           multiclassification: false
@@ -175,12 +175,12 @@ stages:
     cmd: python3 src/04/main.py 4
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 4cc1f94e87d896b44efbfff41826b421
-      size: 1858
+      md5: ae4a1c18791d395d25d50879d990dae1
+      size: 2421
     outs:
     - path: metrics/metrics4.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
+      md5: fec880dc12692a941f60544aeba697af
+      size: 301
   Preprocessing@0:
     cmd: python3 src/01/main.py 0
     deps:
@@ -229,12 +229,12 @@ stages:
     cmd: python3 src/04/main.py 3
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 4cc1f94e87d896b44efbfff41826b421
-      size: 1858
+      md5: ae4a1c18791d395d25d50879d990dae1
+      size: 2421
     outs:
     - path: metrics/metrics3.json
-      md5: 0f0f9d5bd3e4941777d4647df7022634
-      size: 23
+      md5: 8139610092cabc845139745ad3e91768
+      size: 290
   Preprocessing@2:
     cmd: python3 src/01/main.py 2
     deps:
@@ -301,54 +301,54 @@ stages:
     cmd: python3 src/04/main.py 2
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 4cc1f94e87d896b44efbfff41826b421
-      size: 1858
+      md5: ae4a1c18791d395d25d50879d990dae1
+      size: 2421
     outs:
     - path: metrics/metrics2.json
-      md5: d802a74d77ea67ed1ffddc8b6eda7c24
-      size: 38
+      md5: 736a91c1e2d73e02ac350f5a95f70c34
+      size: 463
   Reporting@0:
     cmd: python3 src/04/main.py 0
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 4cc1f94e87d896b44efbfff41826b421
-      size: 1858
+      md5: ae4a1c18791d395d25d50879d990dae1
+      size: 2421
     outs:
     - path: metrics/metrics0.json
-      md5: 70b773dcbd7151c3d0228cc8242a260a
-      size: 38
+      md5: d32c2d76471b34ef2f857107869531b2
+      size: 540
   Reporting@1:
     cmd: python3 src/04/main.py 1
     deps:
     - path: data/03/dataset1/0/results.csv
-      md5: 4cc1f94e87d896b44efbfff41826b421
-      size: 1858
+      md5: ae4a1c18791d395d25d50879d990dae1
+      size: 2421
     outs:
     - path: metrics/metrics1.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
+      md5: 931484348a67f7f5706163908a65a8a0
+      size: 425
   Overall_metrics:
     cmd: python3 src/04/overall.py
     deps:
     - path: metrics/metrics0.json
-      md5: 70b773dcbd7151c3d0228cc8242a260a
-      size: 38
+      md5: d32c2d76471b34ef2f857107869531b2
+      size: 540
     - path: metrics/metrics1.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
+      md5: 931484348a67f7f5706163908a65a8a0
+      size: 425
     - path: metrics/metrics2.json
-      md5: d802a74d77ea67ed1ffddc8b6eda7c24
-      size: 38
+      md5: 736a91c1e2d73e02ac350f5a95f70c34
+      size: 463
     - path: metrics/metrics3.json
-      md5: 0f0f9d5bd3e4941777d4647df7022634
-      size: 23
+      md5: 8139610092cabc845139745ad3e91768
+      size: 290
     - path: metrics/metrics4.json
-      md5: 668b3a105e62f18b7496014e8e327fbb
-      size: 38
+      md5: fec880dc12692a941f60544aeba697af
+      size: 301
     outs:
     - path: metrics/final_metrics.json
-      md5: e9c6ce7a3ca1afb6dba07724aaabb55d
-      size: 49
+      md5: c0e84672469caec0f1adaa99b9b84828
+      size: 1778
   Train@2:
     cmd: python3 src/02/main.py 2
     deps:

@@ -114,7 +114,7 @@ if __name__ == "__main__":
     com_images = np.load("data/dataset1/kernel/compressedImagesSize.npy", allow_pickle=True)
 
     print(com_images.shape)
-
+    print(com_images)
 
     img = Image.fromarray(com_images[1,:,:,:]) # this is the way to open the images
     print(img)

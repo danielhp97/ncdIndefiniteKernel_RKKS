@@ -69,6 +69,15 @@ def ncd_preparation(dataset, ncd_type):
             np_images.append(temp)
             counter_x +=1
             print("Tempo de execucao: {}".format(time.time()-start_time))
+        elif ncd_type == 'PNG':
+            start_time = time.time()
+            print("imagem x: {0}".format(counter_x))
+            temp = Image.open(i)
+            temp = image_filtering(temp)
+            temp = np.asarray(temp)
+            np_images.append(temp)
+            counter_x +=1
+            print("Tempo de execucao: {}".format(time.time()-start_time))
         else:
             start_time = time.time()
             print("imagem x: {0}".format(counter_x))
@@ -153,7 +162,7 @@ if __name__ == "__main__":
     # ncd_kernel
     np_images= np.load('data/dataset{0}/kernel/compressedImagesSize.npy'.format(dataset_number), allow_pickle=True)
 
-
+    #
     print("Starting kernel calculation")
     kernel = ncd_kernel(np_images)
     # output kernel

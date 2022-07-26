@@ -69,3 +69,9 @@ rever parametros/ rever etapas
 POR DVC A FUNCIONAR!
 
 rerun com classes diferentes para testar se funciona
+
+
+
+
+compress images 
+alterar ncd_jpeg

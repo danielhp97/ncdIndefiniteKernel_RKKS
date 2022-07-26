@@ -60,7 +60,11 @@ stages:
       deps:
         - data/03/dataset${Parameters.dataset}/0/results.csv
       outs:
-        - metrics/metrics${item}.json  
+        - metrics/metrics${item}.json:
+            cache: false
+      #plots:
+      #  - dvc_plots/auc${item}.json:
+      #      cache: false 
   Overall_metrics:
     cmd: python3 src/04/overall.py
     deps:
@@ -72,4 +76,7 @@ stages:
     metrics:
       - metrics/final_metrics.json:
           cache: false
+    #plots:
+    #  - dvc_plots/aucfinal.json:
+    #      cache: false
     

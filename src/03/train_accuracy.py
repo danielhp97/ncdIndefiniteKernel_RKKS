@@ -119,20 +119,20 @@ def get_testing_indices(kernel, general_labels_path, class1, class2):
 
 ################################################################################
 
-def dir_cleaning(x):
-    #deleting
-    if os.path.exists("data/03/dataset" + str(dataset_number) + "/{0}".format(x)):
-        for f in os.path.os.listdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x)):
-            # ver se e directoria
-            if os.path.isdir(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f)):
-                for f2 in os.path.os.listdir("data/03/dataset" + str(dataset_number) + "/{0}/{1}".format(x,f)):
-                    os.remove(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}/{1}".format(x,f), f2))
-                os.rmdir(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f))
-            elif os.path.isfile(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f)):
-                os.remove(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f))
-        os.rmdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x))
-    #### writing
-    os.mkdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x))
+#def dir_cleaning(x):
+#    #deleting
+#    if os.path.exists("data/03/dataset" + str(dataset_number) + "/{0}".format(x)):
+#        for f in os.path.os.listdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x)):
+#            # ver se e directoria
+#            if os.path.isdir(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f)):
+#                for f2 in os.path.os.listdir("data/03/dataset" + str(dataset_number) + "/{0}/{1}".format(x,f)):
+#                    os.remove(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}/{1}".format(x,f), f2))
+#                os.rmdir(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f))
+#            elif os.path.isfile(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f)):
+#                os.remove(os.path.join("data/03/dataset" + str(dataset_number) + "/{0}".format(x),f))
+#        os.rmdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x))
+#    #### writing
+#    os.mkdir("data/03/dataset" + str(dataset_number) + "/{0}".format(x))
 
 
 if __name__ == "__main__":
@@ -184,6 +184,6 @@ if __name__ == "__main__":
     final_data['Prediction'] = [ sign(x, class1, class2) for x in final_data['Prediction']]
 
     # store results
-    dir_cleaning(i)
+    #dir_cleaning(i)
     print("Storing data on disk")
     final_data.to_csv("data/03/dataset{0}/{1}/results_test.csv".format(dataset_number, i))

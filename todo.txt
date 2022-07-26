@@ -66,3 +66,105 @@ THEN we add a p constant hyperparameter
 p increases: all images appear similar (increasing repulsion)
 
 p is chosen independentely and each category
+
+
+
+
+
+
+    #heatmap kernel matrix
+    # plot dist. size of images feito
+    # save images as temp on ncd instead of getting size from BytesIO feito 
+    auc com o score da signal func feito
+
+    brincar com ncds 
+
+    criar o tiff test . pegar ans 3 imagens  ✅
+
+    comparar Original1: class1 (perto de 1)
+            Original1: class2 (?)
+            Original1: Original1 (perto de 0)
+    pegar em 3 images: 1 da classe 1, outra da classe 1, uma da classe 2 o mais diferente possivel.
+
+
+    testar distancias com tiff ✅ só e com paq9        
+
+    ^^^^faazer hoje
+    vvvvv com tempo olhar para isto: pelo menos por os auc direitinhos.
+
+    depois, extra:
+
+    pegar nos gráficos de AUC e pô-los bonitos
+
+    implementar um TIFF na pipeline principal
+
+    ver 
+
+
+
+
+    insights:
+
+    TIFF is not a good format as it is losslesss: all the files are the same size.*
+
+    PNG is where the differences between images are noticed the most. Problem, I dont understand why, but the NCD is bigger than one.
+    The concatenated size is just too big for the single images.
+
+    This result may explain the values in JPEG: they are more or less a tenth of the values of png, the problem may not be with the compression itself
+    but withe the NCD calculation method.
+    * after the NCD calculation, it is worth it to re-check the TIFF
+
+    https://link.springer.com/article/10.1007/s11416-015-0260-0
+
+    # checks to see if the compression is applicable. IT is a NORMAL COMPRESSION if:
+
+    Idempotence: |𝐶(𝑋𝑋)|=|𝐶(𝑋)| and |𝐶(𝜆)|=0, where 𝜆 is the empty string. 
+
+    Monotonicity: |𝐶(𝑋𝑌)|≥|𝐶(𝑋)|. ✅
+
+    Symmetry: |𝐶(𝑋𝑌)|=|𝐶(𝑌𝑋)|. ✅
+
+    Distributivity: |𝐶(𝑋𝑌)|+|𝐶(𝑍)|≤|𝐶(𝑋𝑍)|+|𝐶(𝑌𝑍)|.
+
+    where C(X) denotes the string 𝑋′ resulting from the application of compressor C to string X,
+    XY denotes the concatenation of X and Y,  
+    and |X| denotes the length of string (or file) X.
+
+
+    The problem may be in Idempotence.
+    the idempotence property says simply that if an object comprises a simple duplication of a smaller object,
+    the compression algorithm should be able to take advantage of that, 
+    and come close to compressing it to the size to which it can compress the smaller object
+    
+    Our experiments have shown serious violation of the idempotence axiom that has been used to prove theoretical properties of NCD,
+    leaving a potential gap between theory and practice. 
+
+     original definition of NCD, J is simply concatenation.
+     In an ideal world, J would locate similar chunks of X and Y and place them adjacently.
+     However, if J is too destructive of the original strings, 
+      much of the original compression of X and Y individually will be lost,
+      resulting in a higher overall value for NCD𝐶,𝐽(𝑋,𝑌)
+
+
+    Interleaving -> The simplest approach is to assume that similar parts of x and y are similarly located,
+        and just weave them together in chunks of size b;
+
+        > We can test Merging different image bands:
+            - Create a new image
+            Separate the bands of to images 
+            Join bands on new image
+            calculate size of that image.
+            (to be used with PNG, lets see results.)
+            on string comparison there was a big (30% jump) accuracy increase - according to the article
+
+    NCD-shuffle -> Another approach is to split both strings into chunks of the desired size 
+    (selected to be appropriate for the compression algorithm) 
+    and apply the traditional NCD to determine the similarity of each chunk of X to each chunk of Y, 
+    and align them accordingly, with the most similar chunks from the two strings adjacent.
+
+
+
+hj, vamos tratar do Interleaving,
+    testar todas as combinações e depois testar uma imagem média de todas as combinações
+
+perceber como funciona o NCD-shuffle 
