@@ -165,6 +165,73 @@ p is chosen independentely and each category
 
 
 hj, vamos tratar do Interleaving,
-    testar todas as combinações e depois testar uma imagem média de todas as combinações
+    testar todas as combinações e depois testar uma imagem média de todas as combinações ✅
 
 perceber como funciona o NCD-shuffle 
+
+
+Hoje:
+
+Change params.yaml to add "Concatenation Type" - "NP Concatenation", "Interleaving", "NCD SHUFFLE" ✅
+                      add "Compression Type" - "TIFF", "JPEG", "PNG" ✅
+
+Change kernel_calc and ncd to simplify those parameters:
+    Probably need to change the order of operations: first calculate concatenated image then calculate the ncd given the compression
+
+documented everything ✅
+need to change ncd_matrix 
+
+ncd_matrix(list_of_images):
+    n = len(list_images)
+    K = (n,n)
+    for i in range(n):
+        for j in range(i,n):
+            K[i,j] = ncd_general(Image.fromarray(list[i]),Image.fromarray(list[j]))
+            K[j,i] = K[i,j]
+    return K
+
+ncd_general(img1, img2):
+    case concatenation_type = "interleaved":
+        concat1 = Image.fromarray(img1)
+        concat2 = Image.fromarray(img2)
+        len_concat_image = concat_image_calc(img1,img2)
+    case concatenation_type = "classic":
+        #
+    ncd_value = ncd_calc(img1,img2, len_concat_image, params['compression_type'])
+    return ncd_value
+
+concat_image_calc(img1,img2):
+    return self.interleave_img(img1, img2, 'RGB')
+
+
+ncd_calc(img1,img2,concat, param):
+    len1 = Image_to_byte(img1,param)
+    len2 = Image_to_byte(img2, param)
+    concat_image_len = Image_to_byte(concat_image, param)
+    return ncd_formula(lenx,leny,lenconcat)
+
+ncd_formula(len1, len2, lenconcat):
+    return (len(concat) - min(len1, len2)) / max(lenx, leny)
+
+
+
+
+
+check and better AUC graphs,
+
+Test with ncd shuffle
+Implement NCD shuffle
+
+change dir to make a testfolder and put all tests in there
+
+Tidy general dir
+
+
+
+After: Fix DVC- dagshub connection (probably speak with Gabriel after)
+
+
+
+Start writing:
+    Decide chapters,
+    Decide structure and objective

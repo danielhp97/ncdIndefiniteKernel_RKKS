@@ -7,6 +7,10 @@ Parameters:
     rotation_ncd: True
   ncd_baseline:
     ncd_type : PNG
+  compression_type: PNG # PNG, JPEG, TIFF
+  concatenation:
+    concatenation_type: interleaved # interleaved, NCD_shuffle, np_concat
+    concatenation_axis: 0
   kfold_nr: 5
   dataset: 1
   multiclassification: False
