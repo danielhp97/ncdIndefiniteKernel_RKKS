@@ -18,7 +18,6 @@ if __name__== "__main__":
         params = yaml.safe_load(fd)
     params=params['Parameters']
     dataset_number = params['dataset']
-    ncd_type = params['ncd_baseline']['ncd_type']
 
     base_dir = "data/03/dataset" + str(dataset_number) + "/"
     write_dir = "metrics/"
@@ -48,7 +47,6 @@ if __name__== "__main__":
     # write metrics to json
     with open('metrics/final_metrics.json', 'w') as o:
         json.dump(overall_json, o)
-    plt.close()
     plt.plot(overall_json['FPR'], overall_json['TPR'])
     plt.savefig('plots/aucFinal.png', bbox_inches='tight')
     plt.close()

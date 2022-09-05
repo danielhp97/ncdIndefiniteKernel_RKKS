@@ -1,6 +1,7 @@
 from logging import raiseExceptions
 import os
 import re
+from tqdm import tqdm
 import csv
 import yaml
 import pandas as pd
@@ -17,6 +18,11 @@ dataset_number = params['dataset']
 datasetNumber= params['dataset']
 
 def label_dataset1():
+    """
+        Takes a dataset in the form of dataset<dataset_number>/<category>/image__<number>.jpg and automatically creates label file
+        Only needed to be ran once for each new dataset!
+    """
+    print("Labelling Dataset...")
     all = os.listdir('data/dataset' + str(dataset_number))
     categories = []
     for a in all:
@@ -25,25 +31,17 @@ def label_dataset1():
                 categories.append(a)
     #for each category: get list of pictures, add label 'category name' and picture path
     os.remove(os.path.join("data","dataset"+str(dataset_number),"labels.csv"))
-    for c in categories:
+    for c in tqdm(categories):
         imgs = os.listdir('data/dataset' + str(dataset_number) + '/' + c +'/')
-        for i in imgs:
-            print(i)
+        for i in tqdm(imgs, leave=False):
             entry = []
-            if i == "compressedImages.npy":
-                pass
-            elif i == "kernelmatrix.npy":
-                pass
-            elif i == "labels.csv":
-                pass
-            elif i == ".DS_Store":
-                pass
-            else:
-                print(i)
+            if re.match("image.*", i):
                 number = re.search("[1-9]+", i).group(0) #regex change name of picture (to label)
                 name = c + '_' + number + '.jpg' #regex change name of picture (to label)
                 path = '/dataset' + str(dataset_number) + '/' + c + '/' + i
                 entry.append((name, c, path)) # accordion_0017.jpg | accordion | /accordion/Image_0017.jpg
+            else:
+                pass
             # remove labels file
             with open('data/dataset' + str(dataset_number) + '/labels.csv', 'a', newline='') as f:
                 writer_obj = csv.writer(f)
@@ -53,6 +51,11 @@ def label_dataset1():
             df.to_csv('data/dataset' + str(dataset_number) + '/labels.csv', index=False)        
 
 def dataset1_subset():
+    """ 
+        Takes a dataset configured after being labeled and subsets it depending on the classes chosen
+        Needs to run everytime the classes are modified.
+    """
+    print("Subsetting Dataset...")
     labels = pd.read_csv('data/dataset' + str(dataset_number) + '/labels.csv', header=None, quotechar="'", sep=',')
     labels0_fixed = labels.iloc[:,0].str.split("(",expand=True)[1]
     labels2_fixed = labels.iloc[:,2].str.split(")",expand=True)[0]
@@ -68,6 +71,10 @@ def dataset1_subset():
     return(f_labeled,labels_list)
 
 def dataset1_kfoldsplit():
+    """
+        Auxiliary function to dataset_split: Creates Kfoldsplits and returns a dict of train/test splits
+    """
+    print("Applying Kfold-Split")
     # cross validation
     KF = KFold(n_splits=params['kfold_nr'], shuffle=True) #different sets created
     # we need to iterate over each set and store the index
@@ -85,6 +92,9 @@ def dataset1_kfoldsplit():
     return dtrain_x, dtrain_y, dtest_x, dtest_y, dtrain_indexes, dtest_indexes
 
 def dataset1_dir_cleaning(x):
+    """
+        Cleans data/00 for every new run
+    """
     if os.path.isfile("data/00/dataset" + str(dataset_number) + "/train/{0}/x.csv".format(x)): # check if labels exist: if yes, delete it.
             os.remove("data/00/dataset" + str(dataset_number) + "/train/{0}/x.csv".format(x))
     if os.path.isfile("data/00/dataset" + str(dataset_number) + "/train/{0}/y.csv".format(x)): # check if labels exist: if yes, delete it.
@@ -105,8 +115,15 @@ def dataset1_dir_cleaning(x):
     os.mkdir("data/00/dataset" + str(dataset_number) + "/test/{0}".format(x))
 
 def dataset1_split():
+    """
+        Takes into account the subset dataset and splits it into several K-Fold.
+        Needs to be ran:
+            -> Everytime the number of Kfolds are changed
+            -> Everytime the classes are changed
+    """
+    print("Splitting Dataset...")
     dtrain_x, dtrain_y, dtest_x, dtest_y, dtrain_indexes, dtest_indexes = dataset1_kfoldsplit()
-    for i in range(0,params['kfold_nr']):
+    for i in tqdm(range(0,params['kfold_nr'])):
         dataset1_dir_cleaning(i) #check if directories and csv exist
         # export to csv
         dtrain_x["{0}".format(i)].to_csv(path_or_buf="data/00/dataset" + str(dataset_number) + "/train/{0}/x.csv".format(i),index=False,header=False)

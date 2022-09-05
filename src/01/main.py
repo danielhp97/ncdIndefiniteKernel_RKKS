@@ -1,3 +1,4 @@
+from ast import Raise
 import numpy as np
 import pandas as pd
 import yaml
@@ -9,6 +10,9 @@ from PIL import Image
 from PIL.ImageFilter import MedianFilter, BLUR
 
 def get_dir(path):
+    """
+        Auxiliary function that loads train and test values given a path.   
+    """
     # get csv for x and y 
     x = pd.read_csv(os.path.join(path, "x.csv"), header=None, quotechar="'", sep=',')
     y = pd.read_csv(os.path.join(path, "y.csv"), header=None, quotechar="'", sep=',')
@@ -19,28 +23,36 @@ def get_dir(path):
     return x_list, y.values.tolist() 
 
 def rotation(img):
+    """
+        Deprecated Function: takes and Image.Image object, retuns 3 Image.Image Objects with each image rotated by 2.5
+    """
     rotation1 = img.rotate(2.5)
     rotation2 = rotation1.rotate(2.5)
     rotation3 = rotation2.rotate(2.5)
     return rotation1, rotation2, rotation3
 
-def image_filtering(img, normal=False):
+def image_filtering(img, filtering=False):
+    """
+        Resizes them and adds the possibily to apply filters to them
+        ** FIltering Under works    
+     """
     #filtered = img.filter(MedianFilter(size=9))
     resized = img.resize((300,240))
-    if normal:
+    if filtering:
+        UserWarning("Filtering results not checked yet")
         resized = resized.filter(BLUR)
         resized = resized.filter(MedianFilter)
     return resized
 
 def dir_cleaning(x):
-    #deleting
+    """
+        Cleans data/01 directory preparing it for a new run
+    """
     if os.path.exists("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x)):
         for f in os.path.os.listdir("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x)):
             # ver se e directoria
             if os.path.isdir(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x),f)):
-                print(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x),f))
                 for f2 in os.path.os.listdir("data/01/dataset" + str(dataNumber) + "/train/{0}/{1}".format(x,f)):
-                    print(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}/{1}".format(x,f), f2))
                     os.remove(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}/{1}".format(x,f), f2))
                 os.rmdir(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x),f))
             elif os.path.isfile(os.path.join("data/01/dataset" + str(dataNumber) + "/train/{0}".format(x),f)):
@@ -129,7 +141,7 @@ if __name__ == "__main__":
         p = p.replace(" ", "")
         p_name = p.split("/")[-1]#get the image name
         temp = Image.open(base_dir + p)
-        temp = image_filtering(temp, normal=True)
+        temp = image_filtering(temp, filtering=False)
         if token:
             temp.save(new_test_dir + "/" + p_name)
             #save a file com o nome da image e a label

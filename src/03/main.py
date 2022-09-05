@@ -6,6 +6,7 @@ sys.path.insert(1, './src/00/')
 import os
 import yaml
 import time
+from tqdm import tqdm
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -30,7 +31,7 @@ def data_preparation(base_dir, split="test"):
     data = pd.read_csv(base_dir + str(split) + "/" + str(i) + "/img_dump/labels.csv")
     return data
         
-def ncd_preparation(dataset, i):
+def data_array_preparation(dataset, i):
     data = dataset
     np_images = []
     temp = data['File']
@@ -38,20 +39,18 @@ def ncd_preparation(dataset, i):
         row['Path'] = 'data/01/dataset{}/test/{}/img_dump/{}'.format(dataset_number,i ,row['File'])
     path_list = data['Path']
     counter_x = 0
-    for i in path_list:
+    for i in tqdm(path_list):
         start_time = time.time()
-        print("imagem x: {0}".format(counter_x))
         temp = Image.open(i)
         temp = np.asanyarray(temp, dtype=object)
         np_images.append(temp)
         counter_x +=1
-        print("Tempo de execucao: {}".format(time.time()-start_time))
     return np_images
 
 def path_to_array(label_dir, class1, class2):
     df = pd.read_csv(label_dir + 'labels.csv')
     image_list = []
-    for i in df.iloc[:,0]:
+    for i in tqdm(df.iloc[:,0]):
         temp = Image.open(label_dir + str(i))
         temp = np.asanyarray(temp, dtype=object)
         image_list.append(temp)
@@ -64,8 +63,6 @@ def compare_indices(generalDf, trainDf):
     index_list = []
     for row in trainDf['truePath'].iteritems():
         indexes = generalDf.index[generalDf['truePath']==row[1]]
-        print(indexes)
-        print(row)
         index_list.append(indexes[0])
     return(index_list)
         
@@ -89,6 +86,8 @@ def get_training_indices(kernel, general_labels_path, class1, class2):
     labels_train["truePath"] = "data/dataset" + str(dataset_number) + "/" + labels_train['label'] + "/" + labels_train['image']
     # taking into account column 1 (image_0000.jpg) and 2 (label) create an data/dataset{}/{nlabel}/{image_name}
     # for each element in that line, check the corresponding index of that file in the general labels file.
+    # debugging data:
+    
     indexes = compare_indices(labels, labels_train)
     # append that index to a list
     return indexes
@@ -146,7 +145,6 @@ if __name__ == "__main__":
         params = yaml.safe_load(fd)
     params=params['Parameters']
     dataset_number = params['dataset']
-    ncd_type = params['ncd_baseline']['ncd_type']
     class1 = params['class1']
     class2 = params['class2']
     
@@ -161,7 +159,8 @@ if __name__ == "__main__":
     temp = [t[:-1] for t in temp]
     #temp = temp[-1:]
     data['Class']=temp
-    data_array = ncd_preparation(data, i)
+    print("Appending Images to np.array...")
+    data_array = data_array_preparation(data, i)
     # labels
     label_dir = "data/01/dataset{}/test/{}/img_dump/".format(dataset_number, i)
     image_list, label_list = path_to_array(label_dir, class1, class2)
@@ -182,7 +181,6 @@ if __name__ == "__main__":
     final_data.columns=['Prediction', 'Class', 'Path']
     final_data['Prediction'] = predictions
     final_data['Scores'] = predictions
-    print(final_data)
     final_data = pd.DataFrame(final_data, columns = ['Prediction', 'Class', 'Path', 'Scores'])
     final_data['Prediction'] = [ sign(x, class1, class2) for x in final_data['Prediction']]
 

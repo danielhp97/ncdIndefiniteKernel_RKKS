@@ -1,13 +1,13 @@
-class1: camera
-class2: kangaroo
+class1: dalmatian
+class2: camera
+compression_type: png
+concatenation:
+  concatenation_axis: 0
+  concatenation_type: interleaved
 dataset: 1
-feature_extration:
-  rotation_ncd: true
 kfold_nr: 5
 multiclassification: false
-ncd_baseline:
-  ncd_type: PNG
 preprocess:
-  label: true
+  label: false
   split: true
   subset: true

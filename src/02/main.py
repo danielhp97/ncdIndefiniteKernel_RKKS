@@ -24,6 +24,8 @@ def compare_indices(generalDf, trainDf):
     index_list = []
     for row in trainDf['truePath'].iteritems():
         indexes = generalDf.index[generalDf['truePath']==row[1]]
+        print(indexes)
+        print(row[1])
         index_list.append(indexes[0])
     return(index_list)
         
@@ -47,6 +49,7 @@ def get_training_indices(kernel, general_labels_path, class1, class2):
     labels_train["truePath"] = "data/dataset" + str(dataset_number) + "/" + labels_train['label'] + "/" + labels_train['image']
     # taking into account column 1 (image_0000.jpg) and 2 (label) create an data/dataset{}/{nlabel}/{image_name}
     # for each element in that line, check the corresponding index of that file in the general labels file.
+    print(labels)
     indexes = compare_indices(labels, labels_train)
     # append that index to a list
     return indexes

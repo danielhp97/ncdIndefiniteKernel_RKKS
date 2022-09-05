@@ -1,4 +1,6 @@
 metrics
 temp
 /data
-/env
+env
+.vscode
+__pycache__

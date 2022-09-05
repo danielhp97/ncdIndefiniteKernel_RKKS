@@ -1,21 +1,17 @@
 Parameters:
   preprocess:
-    label: True
+    label: False
     subset: True
     split: True
-  feature_extration:
-    rotation_ncd: True
-  ncd_baseline:
-    ncd_type : PNG
-  compression_type: PNG # PNG, JPEG, TIFF
+  compression_type: png # PNG, JPEG, TIFF
   concatenation:
     concatenation_type: interleaved # interleaved, NCD_shuffle, np_concat
-    concatenation_axis: 0
+    concatenation_axis: 0 # for classic/np_concat
   kfold_nr: 5
   dataset: 1
   multiclassification: False
-  class1 : 'camera'
-  class2 : 'kangaroo'
+  class1 : 'dalmatian'
+  class2 : 'camera'
 General:
   kfold_iterations:
     - 0

@@ -70,7 +70,9 @@ POR DVC A FUNCIONAR!
 
 rerun com classes diferentes para testar se funciona
 
+erros a limpar:
 
+subsetting is not working properly: on dataset1/train/it/labels.csv the general label still has the old class
 
 
 compress images 

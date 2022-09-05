@@ -179,7 +179,7 @@ Change kernel_calc and ncd to simplify those parameters:
     Probably need to change the order of operations: first calculate concatenated image then calculate the ncd given the compression
 
 documented everything ✅
-need to change ncd_matrix 
+need to change ncd_matrix ✅
 
 ncd_matrix(list_of_images):
     n = len(list_images)
@@ -217,12 +217,12 @@ ncd_formula(len1, len2, lenconcat):
 
 
 
-check and better AUC graphs,
+check and better AUC graphs, (use sns)
 
-Test with ncd shuffle
+Test with ncd shuffle (look at ncd shuffle)
 Implement NCD shuffle
 
-change dir to make a testfolder and put all tests in there
+change dir to make a testfolder and put all tests in there ✅
 
 Tidy general dir
 

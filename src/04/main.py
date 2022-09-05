@@ -33,7 +33,6 @@ if __name__== "__main__":
         params = yaml.safe_load(fd)
     params=params['Parameters']
     dataset_number = params['dataset']
-    ncd_type = params['ncd_baseline']['ncd_type']
 
     base_dir = "data/03/dataset" + str(dataset_number) + "/"
     write_dir = "metrics/"
